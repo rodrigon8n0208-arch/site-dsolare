@@ -181,9 +181,10 @@ h1, h2, h3, .display {
   width: 1.4rem;
   height: 1px;
   background: currentColor;
-  transition: width 220ms var(--ease-out-expo);
+  transform-origin: left center;
+  transition: transform 220ms var(--ease-out-expo);
 }
-.link-arrow:hover::after { width: 2.1rem; }
+.link-arrow:hover::after { transform: scaleX(1.5); }
 .link-arrow:hover { text-decoration-color: currentColor; }
 .link-arrow--back { flex-direction: row-reverse; }
 
