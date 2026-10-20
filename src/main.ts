@@ -3,11 +3,16 @@ import '@fontsource-variable/figtree';
 import './styles/tokens.css';
 import './styles/base.css';
 import { buildPanelGrid } from './ui/panel-grid';
+import { initNav } from './ui/nav';
+import { initMotion } from './motion/setup';
 import { createConsent } from './lead/consent';
 import { fbqProxy } from './lead/pixel';
 import { initConsentBanner, initLeadForm, initQuickForm, prefillFromQuery } from './lead/form';
 
 buildPanelGrid();
+
+const motion = initMotion();
+initNav(motion.onProgress);
 
 let storage: Storage | null = null;
 try { storage = window.localStorage; } catch { /* bloqueado */ }
