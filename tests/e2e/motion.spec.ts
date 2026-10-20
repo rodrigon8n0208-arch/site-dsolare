@@ -112,3 +112,44 @@ test.describe('assinatura 2 · memorial de cálculo', () => {
     expect(await cotasDrawn(page)).toBe(true);
   });
 });
+
+test.describe('movimentos de apoio', () => {
+  test('manifesto: riscos começam vazios e terminam completos', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForTimeout(600);
+    const strikes = () => page.evaluate(() => Array.from(document.querySelectorAll<HTMLElement>('[data-anim="strike"]')).map((el) => {
+      const v = getComputedStyle(el).getPropertyValue('--strike').trim();
+      return v === '' ? 1 : parseFloat(v);
+    }));
+    expect((await strikes()).every((v) => v < 0.05)).toBe(true);
+    await scrollThrough(page);
+    expect((await strikes()).every((v) => v > 0.99)).toBe(true);
+  });
+
+  test('citação: palavras começam apagadas e terminam acesas', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForTimeout(600);
+    const words = page.locator('#citacao [data-anim="words"] .word');
+    await expect.poll(() => words.count()).toBeGreaterThan(5);
+    expect(parseFloat(await words.first().evaluate((el) => getComputedStyle(el).opacity))).toBeLessThan(0.5);
+    await scrollThrough(page);
+    expect(await hiddenAnimated(page)).toEqual([]);
+  });
+
+  test('títulos de seção revelam por linha', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForTimeout(600);
+    await expect.poll(() => page.locator('#servicos .section-title .line').count()).toBeGreaterThan(0);
+  });
+
+  test('FAQ funciona pelo teclado', async ({ page }) => {
+    await page.goto('/');
+    const first = page.locator('#faq summary').first();
+    await first.focus();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#faq details').first()).toHaveAttribute('open', '');
+    await expect(page.locator('#faq .qa__body').first()).toBeVisible();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#faq details').first()).not.toHaveAttribute('open', '');
+  });
+});

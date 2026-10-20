@@ -617,7 +617,7 @@ html.has-sky .sky-fallback { opacity: 0; transition: opacity 600ms ease; }
 /* ───────── Projetos ───────── */
 .cases { display: grid; gap: clamp(2.5rem, 5vw, 3.5rem) 2rem; }
 .case__media { overflow: hidden; background: #dbe4ef; }
-.case__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transform: scale(1.08); }
+.case__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; scale: 1.12; }
 .case__tag {
   display: flex;
   align-items: center;
@@ -640,7 +640,7 @@ html.has-sky .sky-fallback { opacity: 0; transition: opacity 600ms ease; }
 .sobre { padding-bottom: 0; }
 .team { position: relative; margin: 0; }
 .team__media { overflow: hidden; }
-.team__media img { width: 100%; height: clamp(26rem, 78vh, 46rem); object-fit: cover; transform: scale(1.06); }
+.team__media img { width: 100%; height: clamp(26rem, 78vh, 46rem); object-fit: cover; scale: 1.12; }
 .team__caption {
   display: grid;
   gap: 0.6rem;
@@ -678,7 +678,7 @@ html.has-sky .sky-fallback { opacity: 0; transition: opacity 600ms ease; }
   box-decoration-break: clone;
 }
 .practice p { margin: 0; max-width: 56ch; color: var(--text-night-soft); }
-.practice__answer { color: #fff; font-weight: 600; }
+.practice__answer { color: var(--color-sun); font-weight: 600; }
 .manifesto__close {
   margin: clamp(3rem, 6vw, 4.5rem) 0 0;
   max-width: 44ch;
