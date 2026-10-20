@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #00428c;
+  --color-navy-deep: #00315f;
+  --color-night: #061529;
+  --color-midnight: #040d1a;
+  --color-sun: #f4901e;
+  --color-sun-deep: #d9480f;
+  --color-day: #f5f8fc;
+  --color-ink: #0b1a2e;
+
+  --font-display: "Archivo Variable", "Archivo", system-ui, sans-serif;
+  --font-sans: "Figtree Variable", "Figtree", system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
