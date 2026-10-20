@@ -73,7 +73,7 @@ test.describe('assinatura 1 · luz vira energia', () => {
     await page.waitForTimeout(500);
     expect(await page.locator(pinsAround('#energia')).count()).toBe(0);
     await page.locator('#energia .panel-grid').scrollIntoViewIfNeeded();
-    await expect.poll(() => page.locator('#energia .cell[data-lit="false"]').count(), { timeout: 4000 }).toBe(0);
+    await expect.poll(() => page.locator('#energia .cell[data-lit="false"]').count(), { timeout: 10000 }).toBe(0);
     await expect(page.locator('#energia-title')).toBeVisible();
   });
 

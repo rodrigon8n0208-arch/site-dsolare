@@ -65,8 +65,8 @@ function citacao() {
 
 function contato() {
   const form = document.querySelector('.lead-form');
-  if (form) gsap.from(form, { y: 40, autoAlpha: 0, duration: 1, ease: 'expo.out', scrollTrigger: once(form, 'top 88%') });
-  gsap.from('.contacts > div', { y: 16, autoAlpha: 0, duration: 0.7, stagger: 0.08, ease: 'expo.out', scrollTrigger: once(document.querySelector('.contacts')!, 'top 90%') });
+  // o formulário nunca fica invisível: o seletor do hero foca o campo Nome antes de ele entrar na tela
+  if (form) gsap.from(form, { y: 48, duration: 1.1, ease: 'expo.out', scrollTrigger: once(form, 'top 95%') });
 }
 
 export function initSupport(mm: gsap.MatchMedia): void {
