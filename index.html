@@ -71,19 +71,32 @@
       <section id="topo" class="hero" data-sky-zone>
         <div class="hero__inner wrap">
           <p class="hero__coords" aria-hidden="true">Maceió · 9°39′S 35°44′W</p>
-          <p class="kicker">10 anos em Alagoas · +5.000 projetos entregues</p>
           <h1 class="hero__title" data-anim="lines">
             A sua conta de luz pode ser <em>muito menor.</em> A gente mostra o cálculo.
           </h1>
           <p class="hero__lead">Mais de 5.000 projetos realizados em Alagoas — residencial, corporativo e pós-venda.</p>
-          <div class="hero__actions">
-            <a class="btn btn--sun" href="https://wa.me/558299980160?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20D%27Solare%20e%20quero%20solicitar%20uma%20an%C3%A1lise%20gratuita%20da%20minha%20conta%20de%20luz." target="_blank" rel="noopener">
-              Solicitar análise gratuita
-              <svg class="btn__arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" /></svg>
-            </a>
-            <a class="btn btn--line" href="#projetos">Ver projetos realizados</a>
+          <form class="quick" action="#contato" data-quick>
+            <label class="quick__label" for="q-conta">Conta de luz (R$/mês)</label>
+            <div class="quick__row">
+              <div class="select">
+                <select id="q-conta" name="conta">
+                  <option>Até R$ 300</option>
+                  <option>R$ 300 a R$ 600</option>
+                  <option>R$ 600 a R$ 1.500</option>
+                  <option>R$ 1.500 a R$ 5.000</option>
+                  <option>Acima de R$ 5.000</option>
+                </select>
+              </div>
+              <button class="btn btn--sun" type="submit">
+                Solicitar análise gratuita
+                <svg class="btn__arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" /></svg>
+              </button>
+            </div>
+          </form>
+          <div class="hero__after">
+            <p class="hero__note">Análise gratuita e sem compromisso · resposta pelo WhatsApp</p>
+            <a class="link-arrow hero__more" href="#projetos">Ver projetos realizados</a>
           </div>
-          <p class="hero__note">Análise gratuita e sem compromisso · resposta pelo WhatsApp</p>
         </div>
 
         <div id="numeros" class="ruler wrap">
@@ -122,7 +135,6 @@
       <section id="servicos" class="section section--day">
         <div class="wrap">
           <header class="section-head">
-            <p class="kicker">O que a D'Solare faz</p>
             <h2 class="section-title" data-anim="lines">Não é só instalar painel. É cuidar do projeto inteiro.</h2>
             <p class="section-lead">Residencial, corporativo ou acompanhamento de sistema já instalado — o ponto de partida é sempre o mesmo: entender a sua situação real antes de propor qualquer coisa.</p>
           </header>
@@ -150,11 +162,11 @@
       <section id="metodo" class="section section--sheet metodo">
         <div class="wrap">
           <header class="section-head">
-            <p class="kicker">Como a gente trabalha</p>
             <h2 class="section-title" data-anim="lines">Antes de qualquer proposta, a gente olha os seus dados.</h2>
             <p class="section-lead">A maioria das empresas manda orçamento antes de entender o que você consome, como é o seu telhado e qual é a sua tarifa real. A D'Solare faz o contrário.</p>
           </header>
         </div>
+        <div class="wrap"><p class="sheet-stamp"><span>Memorial de cálculo</span><span>Exemplo ilustrativo</span></p></div>
         <div class="metodo__viewport">
           <ol class="metodo__track">
             <li class="step" data-step="1">
@@ -163,7 +175,25 @@
                 <h3 class="step__title">Diagnóstico</h3>
                 <p>Sua conta de luz, seu telhado, seu sombreamento. A análise vem antes da proposta. Sempre.</p>
               </div>
-              <figure class="step__fig" data-fig="diagnostico"></figure>
+              <figure class="step__fig" data-fig="diagnostico">
+                <svg viewBox="0 0 480 320" role="img" aria-labelledby="fig1-t">
+                  <title id="fig1-t">Conta de luz ilustrativa: consumo do mês, tarifa e histórico de 12 meses</title>
+                  <rect class="ln paper" x="30" y="16" width="250" height="288" />
+                  <rect class="fill-ink" x="30" y="16" width="250" height="34" />
+                  <text class="t t-inv" x="44" y="38">CONTA DE ENERGIA</text>
+                  <g class="field" data-field="consumo"><text class="t" x="44" y="82">Consumo do mês</text><text class="t t-num" x="266" y="82" text-anchor="end">452 kWh</text></g>
+                  <line class="ln-soft" x1="44" y1="94" x2="266" y2="94" />
+                  <g class="field" data-field="tarifa"><text class="t" x="44" y="118">Tarifa</text><text class="t t-num" x="266" y="118" text-anchor="end">R$ 0,98/kWh</text></g>
+                  <line class="ln-soft" x1="44" y1="130" x2="266" y2="130" />
+                  <g class="field" data-field="total"><text class="t" x="44" y="154">Total</text><text class="t t-num t-strong" x="266" y="154" text-anchor="end">R$ 442,96</text></g>
+                  <g class="bars">
+                    <rect class="bar" x="46" y="238" width="11" height="44" /><rect class="bar" x="64" y="230" width="11" height="52" /><rect class="bar" x="82" y="221" width="11" height="61" /><rect class="bar" x="100" y="224" width="11" height="58" /><rect class="bar" x="118" y="216" width="11" height="66" /><rect class="bar" x="136" y="211" width="11" height="71" /><rect class="bar" x="154" y="219" width="11" height="63" /><rect class="bar" x="172" y="227" width="11" height="55" /><rect class="bar" x="190" y="233" width="11" height="49" /><rect class="bar" x="208" y="225" width="11" height="57" /><rect class="bar" x="226" y="214" width="11" height="68" /><rect class="bar bar--hot" x="244" y="208" width="11" height="74" />
+                  </g>
+                  <path class="cota" data-anim="cota" d="M270 78 H330 L344 64" /><text class="t t-label" x="348" y="68">consumo real</text>
+                  <path class="cota" data-anim="cota" d="M270 114 H330 L344 128" /><text class="t t-label" x="348" y="132">tarifa real</text>
+                  <path class="cota" data-anim="cota" d="M270 236 H330 L344 222" /><text class="t t-label" x="348" y="226">12 meses</text>
+                </svg>
+              </figure>
             </li>
             <li class="step" data-step="2">
               <div class="step__copy">
@@ -171,7 +201,26 @@
                 <h3 class="step__title">Projeto</h3>
                 <p>Dimensionamento técnico com assinatura de engenheiro. Cálculo financeiro com os seus números — não os do mercado.</p>
               </div>
-              <figure class="step__fig" data-fig="projeto"></figure>
+              <figure class="step__fig" data-fig="projeto">
+                <svg viewBox="0 0 480 320" role="img" aria-labelledby="fig2-t">
+                  <title id="fig2-t">Corte do telhado ilustrativo: inclinação, incidência do sol, sombreamento e medidas</title>
+                  <circle class="sun-dot" cx="424" cy="46" r="15" />
+                  <path class="ray" d="M410 58 L322 150 M418 64 L346 164 M402 52 L296 136" />
+                  <line class="ln" x1="16" y1="280" x2="464" y2="280" />
+                  <path class="ln paper" d="M120 280 V188 H340 V280" />
+                  <path class="ln" d="M100 190 L230 118 L360 190" />
+                  <path class="panel" d="M246 128 L344 182 L338 192 L240 138 Z" />
+                  <path class="ln-soft" d="M300 190 A60 60 0 0 1 298 168" />
+                  <path class="cota" data-anim="cota" d="M360 190 H300" />
+                  <text class="t t-label" x="268" y="214">inclinação 28°</text>
+                  <circle class="ln tree" cx="58" cy="196" r="30" /><line class="ln" x1="58" y1="226" x2="58" y2="280" />
+                  <path class="shade" d="M84 186 L232 128" />
+                  <text class="t t-label" x="22" y="152">sombreamento</text>
+                  <path class="cota" data-anim="cota" d="M120 300 H340 M120 293 V307 M340 293 V307" />
+                  <text class="t t-num" x="230" y="296" text-anchor="middle">8,40 m</text>
+                  <path class="ln" d="M40 40 V74 M32 52 L40 40 L48 52" /><text class="t t-strong" x="35" y="94">N</text>
+                </svg>
+              </figure>
             </li>
             <li class="step" data-step="3">
               <div class="step__copy">
@@ -179,7 +228,17 @@
                 <h3 class="step__title">Instalação</h3>
                 <p>Equipe própria, equipamentos certificados, prazo que a gente cumpre. Você acompanha cada etapa.</p>
               </div>
-              <figure class="step__fig" data-fig="instalacao"></figure>
+              <figure class="step__fig" data-fig="instalacao">
+                <svg viewBox="0 0 480 320" role="img" aria-labelledby="fig3-t">
+                  <title id="fig3-t">Planta ilustrativa do telhado com 12 módulos em duas fileiras</title>
+                  <rect class="ln-soft paper" x="30" y="34" width="420" height="252" />
+                  <g class="module"><rect class="panel" x="70" y="76" width="50" height="88" /><path class="cell-ln" d="M87 76 V164 M103 76 V164 M70 105 H120 M70 134 H120" /></g><g class="module"><rect class="panel" x="126" y="76" width="50" height="88" /><path class="cell-ln" d="M143 76 V164 M159 76 V164 M126 105 H176 M126 134 H176" /></g><g class="module"><rect class="panel" x="182" y="76" width="50" height="88" /><path class="cell-ln" d="M199 76 V164 M215 76 V164 M182 105 H232 M182 134 H232" /></g><g class="module"><rect class="panel" x="238" y="76" width="50" height="88" /><path class="cell-ln" d="M255 76 V164 M271 76 V164 M238 105 H288 M238 134 H288" /></g><g class="module"><rect class="panel" x="294" y="76" width="50" height="88" /><path class="cell-ln" d="M311 76 V164 M327 76 V164 M294 105 H344 M294 134 H344" /></g><g class="module"><rect class="panel" x="350" y="76" width="50" height="88" /><path class="cell-ln" d="M367 76 V164 M383 76 V164 M350 105 H400 M350 134 H400" /></g><g class="module"><rect class="panel" x="70" y="172" width="50" height="88" /><path class="cell-ln" d="M87 172 V260 M103 172 V260 M70 201 H120 M70 230 H120" /></g><g class="module"><rect class="panel" x="126" y="172" width="50" height="88" /><path class="cell-ln" d="M143 172 V260 M159 172 V260 M126 201 H176 M126 230 H176" /></g><g class="module"><rect class="panel" x="182" y="172" width="50" height="88" /><path class="cell-ln" d="M199 172 V260 M215 172 V260 M182 201 H232 M182 230 H232" /></g><g class="module"><rect class="panel" x="238" y="172" width="50" height="88" /><path class="cell-ln" d="M255 172 V260 M271 172 V260 M238 201 H288 M238 230 H288" /></g><g class="module"><rect class="panel" x="294" y="172" width="50" height="88" /><path class="cell-ln" d="M311 172 V260 M327 172 V260 M294 201 H344 M294 230 H344" /></g><g class="module"><rect class="panel" x="350" y="172" width="50" height="88" /><path class="cell-ln" d="M367 172 V260 M383 172 V260 M350 201 H400 M350 230 H400" /></g>
+                  <path class="cota" data-anim="cota" d="M70 58 H400 M70 51 V65 M400 51 V65" />
+                  <text class="t t-num" x="235" y="50" text-anchor="middle">12 módulos · 6,6 kWp</text>
+                  <path class="cota" data-anim="cota" d="M420 76 V260 M413 76 H427 M413 260 H427" />
+                  <text class="t t-num" x="436" y="172" transform="rotate(90 436 172)" text-anchor="middle">2 fileiras</text>
+                </svg>
+              </figure>
             </li>
             <li class="step" data-step="4">
               <div class="step__copy">
@@ -187,7 +246,19 @@
                 <h3 class="step__title">Acompanhamento</h3>
                 <p>O sistema foi entregue. Começa o segundo capítulo: monitoramento de geração, suporte técnico, atendimento real quando precisar.</p>
               </div>
-              <figure class="step__fig" data-fig="acompanhamento"></figure>
+              <figure class="step__fig" data-fig="acompanhamento">
+                <svg viewBox="0 0 480 320" role="img" aria-labelledby="fig4-t">
+                  <title id="fig4-t">Curva ilustrativa de geração solar ao longo do dia, com pico ao meio-dia</title>
+                  <path class="ln" d="M40 30 V270 H456" />
+                  <line class="ln-soft" x1="40" y1="270" x2="40" y2="276" /><text class="t t-num" x="40" y="294" text-anchor="middle">06h</text><line class="ln-soft" x1="140" y1="270" x2="140" y2="276" /><text class="t t-num" x="140" y="294" text-anchor="middle">09h</text><line class="ln-soft" x1="240" y1="270" x2="240" y2="276" /><text class="t t-num" x="240" y="294" text-anchor="middle">12h</text><line class="ln-soft" x1="340" y1="270" x2="340" y2="276" /><text class="t t-num" x="340" y="294" text-anchor="middle">15h</text><line class="ln-soft" x1="440" y1="270" x2="440" y2="276" /><text class="t t-num" x="440" y="294" text-anchor="middle">18h</text>
+                  <path class="curve-fill" d="M40 270 C130 270 170 64 240 64 S350 270 440 270 Z" />
+                  <path class="curve" d="M40 270 C130 270 170 64 240 64 S350 270 440 270" />
+                  <circle class="peak" cx="240" cy="64" r="5" />
+                  <path class="cota" data-anim="cota" d="M246 60 L292 36 H330" />
+                  <text class="t t-label" x="334" y="40">pico ao meio-dia</text>
+                  <text class="t t-label" x="48" y="46">geração (kWh)</text>
+                </svg>
+              </figure>
             </li>
           </ol>
         </div>
@@ -197,7 +268,6 @@
       <section id="projetos" class="section section--day">
         <div class="wrap">
           <header class="section-head">
-            <p class="kicker">Projetos realizados</p>
             <h2 class="section-title" data-anim="lines">Mais de 5.000 projetos. Cada um com uma conta diferente na história.</h2>
             <p class="section-lead">Cada projeto começa com dados reais e termina com acompanhamento real. Abaixo, exemplos reais de instalações da D'Solare — independente do tamanho da conta ou do telhado.</p>
           </header>
@@ -237,7 +307,6 @@
       <section id="sobre" class="section section--afternoon sobre">
         <div class="wrap">
           <header class="section-head">
-            <p class="kicker">Quem está por trás</p>
             <h2 class="section-title section-title--xl" data-anim="lines">Dois engenheiros. Mais de 120 pessoas. Dez anos construindo junto.</h2>
             <p class="section-lead">Diego Uchoa e Diego Braga se conheceram em Maceió e fundaram a D'Solare em 2016. Dez anos depois, a empresa tem mais de 120 profissionais e continua sendo dirigida pelos mesmos dois sócios — que ainda aparecem nos projetos, ainda respondem mensagens e ainda acreditam que o dono deve conhecer o cliente.</p>
           </header>
@@ -247,7 +316,6 @@
             <img src="/img/usina-aerea.jpg" alt="Vista aérea de uma grande usina solar instalada pela D'Solare em Alagoas" width="1600" height="900" loading="lazy" decoding="async" />
           </div>
           <figcaption class="team__caption wrap">
-            <span class="kicker">O time</span>
             <strong class="team__title">Equipe própria, do projeto ao telhado.</strong>
             <span class="team__text">Instaladores, engenheiros, consultores, atendimento e operações. A D'Solare não terceiriza a entrega — a equipe é própria porque é a única forma de garantir que o padrão chega ao telhado.</span>
           </figcaption>
@@ -258,7 +326,6 @@
       <section id="manifesto" class="section section--dusk manifesto">
         <div class="wrap">
           <header class="section-head">
-            <p class="kicker">Por que a D'Solare existe</p>
             <h2 class="section-title" data-anim="lines">Tem muita coisa errada no mercado solar. A gente escolheu o lado oposto.</h2>
             <p class="section-lead">O setor solar cresceu rápido — e junto vieram práticas que prejudicam quem investe. A D'Solare se posiciona contra três delas. Não como declaração de marketing. Como filtro de decisão: quando há tensão entre fechar mais rápido e fechar do jeito certo, a gente escolhe o jeito certo.</p>
           </header>
@@ -284,7 +351,6 @@
       <section id="faq" class="section section--day faq">
         <div class="wrap faq__grid">
           <header class="section-head">
-            <p class="kicker">Dúvidas frequentes</p>
             <h2 class="section-title" data-anim="lines">A gente explica antes de você perguntar.</h2>
           </header>
           <div class="faq__list">
@@ -320,8 +386,7 @@
       <section id="contato" class="contato" data-sky-zone>
         <div class="wrap contato__grid">
           <div class="contato__copy">
-            <p class="kicker">Pronto para começar</p>
-            <h2 class="contato__title" data-anim="lines">Manda a conta de luz. A gente cuida do resto.</h2>
+            <h2 class="contato__title" data-anim="lines">Manda a conta de luz.<br /> A gente cuida do resto.</h2>
             <p class="contato__lead">A análise é gratuita e sem compromisso. Você envia a sua conta de luz e a foto do telhado, a gente projeta o cálculo real do seu caso e apresenta a proposta com os seus dados — não uma média de mercado.</p>
             <dl class="contacts">
               <div>
@@ -360,13 +425,15 @@
             </div>
             <div class="field">
               <label for="f-conta">Conta de luz (R$/mês)</label>
-              <select id="f-conta" name="conta">
-                <option>Até R$ 300</option>
-                <option>R$ 300 a R$ 600</option>
-                <option>R$ 600 a R$ 1.500</option>
-                <option>R$ 1.500 a R$ 5.000</option>
-                <option>Acima de R$ 5.000</option>
-              </select>
+              <div class="select">
+                <select id="f-conta" name="conta">
+                  <option>Até R$ 300</option>
+                  <option>R$ 300 a R$ 600</option>
+                  <option>R$ 600 a R$ 1.500</option>
+                  <option>R$ 1.500 a R$ 5.000</option>
+                  <option>Acima de R$ 5.000</option>
+                </select>
+              </div>
             </div>
             <div class="hp" aria-hidden="true">
               <label for="f-empresa">Não preencher</label>
