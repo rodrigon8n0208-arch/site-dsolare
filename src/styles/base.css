@@ -600,12 +600,19 @@ html.has-sky .sky-fallback { opacity: 0; transition: opacity 600ms ease; }
   max-width: none;
   gap: 2rem;
 }
+.metodo.is-horizontal .metodo__viewport { height: calc(100svh - var(--header-h)); display: flex; flex-direction: column; justify-content: center; gap: 1.5rem; }
+.metodo.is-horizontal .sheet-stamp { margin: 0; }
+.metodo.is-horizontal .metodo__track { margin: 0; }
+.metodo.is-horizontal .metodo__track { padding-right: 12vw; }
 .metodo.is-horizontal .step {
-  width: min(78vw, 64rem);
+  width: min(74vw, 64rem);
   grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
   align-items: center;
-  min-height: 62vh;
+  max-height: calc(100svh - var(--header-h) - 4rem);
+  box-sizing: border-box;
 }
+.metodo.is-horizontal .step:not([aria-current]) { opacity: 0.55; }
+.metodo.is-horizontal .step { transition: opacity 400ms var(--ease-out-expo); }
 
 /* ───────── Projetos ───────── */
 .cases { display: grid; gap: clamp(2.5rem, 5vw, 3.5rem) 2rem; }

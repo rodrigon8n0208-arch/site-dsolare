@@ -83,3 +83,32 @@ test.describe('assinatura 1 · luz vira energia', () => {
     await expect(page.locator('.ruler__item dd')).toHaveText(['+5.000', '10', '+120', '2016']);
   });
 });
+
+test.describe('assinatura 2 · memorial de cálculo', () => {
+  const cotasDrawn = (page: import('@playwright/test').Page) =>
+    page.evaluate(() => Array.from(document.querySelectorAll<SVGPathElement>('path[data-anim="cota"]')).every((p) => Math.abs(parseFloat(getComputedStyle(p).strokeDashoffset) || 0) < 1));
+
+  test('desktop: pin horizontal termina na etapa 04 com todas as cotas desenhadas', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForTimeout(500);
+    expect(await page.locator('.pin-spacer:has(.metodo__viewport)').count()).toBe(1);
+    await expect(page.locator('#metodo')).toHaveClass(/is-horizontal/);
+    await page.evaluate(async () => {
+      const sp = document.querySelector('.pin-spacer:has(.metodo__viewport)') as HTMLElement;
+      const end = sp.getBoundingClientRect().bottom + scrollY - innerHeight;
+      for (let y = scrollY; y < end; y += 200) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 40)); }
+      scrollTo(0, end - 20);
+      await new Promise((r) => setTimeout(r, 1500));
+    });
+    await expect(page.locator('[data-step="4"]')).toHaveAttribute('aria-current', 'step');
+    expect(await cotasDrawn(page)).toBe(true);
+  });
+
+  test('mobile: lista vertical, cotas desenham ao rolar', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+    await expect(page.locator('#metodo')).not.toHaveClass(/is-horizontal/);
+    await scrollThrough(page, 300);
+    expect(await cotasDrawn(page)).toBe(true);
+  });
+});

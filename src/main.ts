@@ -8,6 +8,7 @@ import { initMotion } from './motion/setup';
 import { startSky } from './sky/mount';
 import { initHero } from './motion/sections/hero';
 import { initEnergia } from './motion/sections/energia';
+import { initMetodo } from './motion/sections/metodo';
 import { createConsent } from './lead/consent';
 import { fbqProxy } from './lead/pixel';
 import { initConsentBanner, initLeadForm, initQuickForm, prefillFromQuery } from './lead/form';
@@ -18,6 +19,7 @@ const motion = initMotion();
 initNav(motion.onProgress);
 initHero(motion.mm);
 initEnergia(motion.mm);
+initMetodo(motion.mm, () => motion.lenis);
 
 let storage: Storage | null = null;
 try { storage = window.localStorage; } catch { /* bloqueado */ }
