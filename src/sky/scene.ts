@@ -141,8 +141,11 @@ export function mountSky(canvas: HTMLCanvasElement, tier: Exclude<Tier, 'none'>)
       skyUniforms.uTop.value.copy(hexToVec3(p.skyTop));
       skyUniforms.uHorizon.value.copy(hexToVec3(p.skyHorizon));
       skyUniforms.uWarmth.value = p.warmth;
-      const x0 = aspect < 1 ? 0.9 : 0.78;
-      skyUniforms.uSun.value.set(x0 - (x0 - 0.22) * progress, 0.2 + Math.max(-0.05, p.sunElevation) * 0.0095);
+      // o sol fica à direita na manhã (hero e #energia) e só depois atravessa o céu
+      const x0 = aspect < 1 ? 0.9 : 0.85;
+      const travel = Math.min(1, Math.max(0, (progress - 0.15) / 0.8));
+      const eased = travel * travel * (3 - 2 * travel);
+      skyUniforms.uSun.value.set(x0 - (x0 - 0.2) * eased, 0.2 + Math.max(-0.05, p.sunElevation) * 0.0095);
       if (!running) render();
     },
     setPointer(x, y) {

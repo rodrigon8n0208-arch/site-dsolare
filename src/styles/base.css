@@ -417,11 +417,12 @@ html.has-sky .sky-fallback { opacity: 0; transition: opacity 600ms ease; }
   min-height: 100svh;
   display: grid;
   align-items: center;
-  padding-block: var(--section-y);
+  padding-block: calc(var(--header-h) + 1.5rem) 2rem;
+  box-sizing: border-box;
 }
-.energia__inner { display: grid; gap: clamp(2.5rem, 6vw, 4.5rem); justify-items: center; text-align: center; }
+.energia__inner { display: grid; gap: clamp(1.5rem, 5vh, 3.5rem); justify-items: center; text-align: center; }
 .energia__title {
-  font-size: clamp(1.9rem, 4.2vw, 3.6rem);
+  font-size: clamp(1.9rem, min(3.8vw, 5.6vh), 3.4rem);
   font-weight: 800;
   font-variation-settings: "wdth" 110;
   line-height: 1.06;
@@ -435,9 +436,9 @@ html.has-sky .sky-fallback { opacity: 0; transition: opacity 600ms ease; }
   display: grid;
   grid-template-columns: repeat(var(--cols), 1fr);
   gap: 3px;
-  width: min(100%, 56rem);
+  width: min(100%, 52rem, 92vh);
   padding: 6px;
-  background: #0a1d38;
+  background: rgb(10 29 56 / 0.55);
   border: 1px solid rgb(169 187 211 / 0.3);
   box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.7);
   transform: perspective(1100px) rotateX(48deg);
@@ -446,12 +447,12 @@ html.has-sky .sky-fallback { opacity: 0; transition: opacity 600ms ease; }
 .panel-grid:empty { display: none; }
 .cell {
   aspect-ratio: 1 / 1.25;
-  background: linear-gradient(160deg, #0f2a52 0%, #0a2045 100%);
+  background: linear-gradient(160deg, rgb(15 42 82 / 0.82) 0%, rgb(10 32 69 / 0.86) 100%);
   box-shadow: inset 0 0 0 1px rgb(169 187 211 / 0.12);
   transition: background 400ms var(--ease-out-expo), box-shadow 400ms var(--ease-out-expo);
 }
 .cell[data-lit="true"] {
-  background: linear-gradient(160deg, #3d77c4 0%, #14427f 38%, #0d3166 100%);
+  background: linear-gradient(160deg, rgb(86 140 214 / 0.85) 0%, rgb(20 66 127 / 0.8) 38%, rgb(13 49 102 / 0.84) 100%);
   box-shadow: inset 0 0 0 1px rgb(244 144 30 / 0.45), inset 6px 6px 14px -8px rgb(255 214 150 / 0.9);
 }
 @media (min-width: 768px) { .panel-grid { --cols: 16; } }

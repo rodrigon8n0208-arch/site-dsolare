@@ -2,6 +2,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { dayPhase } from '../lib/day-phase';
 import { detectQuality, readQualityEnv } from '../lib/quality';
 import type { SkyController } from './scene';
+import { setSky } from './holder';
 
 type OnProgress = (cb: (p: number) => void) => void;
 
@@ -28,6 +29,7 @@ export async function startSky(onProgress: OnProgress): Promise<SkyController | 
     return null;
   }
   root.classList.add('has-sky');
+  setSky(sky);
 
   onProgress((p) => sky.setPhase(dayPhase(p), p));
 

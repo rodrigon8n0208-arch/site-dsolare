@@ -6,6 +6,8 @@ import { buildPanelGrid } from './ui/panel-grid';
 import { initNav } from './ui/nav';
 import { initMotion } from './motion/setup';
 import { startSky } from './sky/mount';
+import { initHero } from './motion/sections/hero';
+import { initEnergia } from './motion/sections/energia';
 import { createConsent } from './lead/consent';
 import { fbqProxy } from './lead/pixel';
 import { initConsentBanner, initLeadForm, initQuickForm, prefillFromQuery } from './lead/form';
@@ -14,6 +16,8 @@ buildPanelGrid();
 
 const motion = initMotion();
 initNav(motion.onProgress);
+initHero(motion.mm);
+initEnergia(motion.mm);
 
 let storage: Storage | null = null;
 try { storage = window.localStorage; } catch { /* bloqueado */ }

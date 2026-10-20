@@ -53,3 +53,33 @@ test('redimensionar no meio da página não quebra o layout', async ({ page }) =
   await page.waitForTimeout(800);
   await expect(page.locator('#metodo h2')).toBeInViewport();
 });
+
+test.describe('assinatura 1 · luz vira energia', () => {
+  const pinsAround = (sel: string) => `.pin-spacer:has(> ${sel})`;
+
+  test('desktop: #energia é pinada e todas as células acendem', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForTimeout(500);
+    expect(await page.locator(pinsAround('#energia')).count()).toBe(1);
+    await expect.poll(() => page.locator('#energia .cell[data-lit="false"]').count()).toBeGreaterThan(0);
+    await scrollThrough(page, 200);
+    expect(await page.locator('#energia .cell[data-lit="false"]').count()).toBe(0);
+    await expect(page.locator('#energia .cell')).toHaveCount(96);
+  });
+
+  test('mobile: sem pin, células acendem ao entrar', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+    await page.waitForTimeout(500);
+    expect(await page.locator(pinsAround('#energia')).count()).toBe(0);
+    await page.locator('#energia .panel-grid').scrollIntoViewIfNeeded();
+    await expect.poll(() => page.locator('#energia .cell[data-lit="false"]').count(), { timeout: 4000 }).toBe(0);
+    await expect(page.locator('#energia-title')).toBeVisible();
+  });
+
+  test('hero: count-up termina nos números reais', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForTimeout(2500);
+    await expect(page.locator('.ruler__item dd')).toHaveText(['+5.000', '10', '+120', '2016']);
+  });
+});
