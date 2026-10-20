@@ -1,5 +1,22 @@
 @import "tailwindcss";
 
+/*
+ * Fallbacks com a largura da Archivo expandida do título (medida: Arial Bold ×1.082, Roboto Bold ×1.333).
+ * Enquanto a fonte real carrega, as linhas do h1 quebram nos mesmos lugares: sem salto de layout.
+ */
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"), local("Helvetica-Bold");
+  font-weight: 700 900;
+  size-adjust: 108.2%;
+}
+@font-face {
+  font-family: "Archivo Fallback Roboto";
+  src: local("Roboto Bold"), local("Roboto-Bold");
+  font-weight: 700 900;
+  size-adjust: 133.3%;
+}
+
 @theme {
   --color-navy: #00428c;
   --color-navy-deep: #00315f;
@@ -10,7 +27,7 @@
   --color-day: #f5f8fc;
   --color-ink: #0b1a2e;
 
-  --font-display: "Archivo Variable", "Archivo", system-ui, sans-serif;
+  --font-display: "Archivo Variable", "Archivo Fallback", "Archivo Fallback Roboto", system-ui, sans-serif;
   --font-sans: "Figtree Variable", "Figtree", system-ui, sans-serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);

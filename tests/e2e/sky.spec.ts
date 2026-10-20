@@ -41,3 +41,16 @@ test.describe('movimento reduzido', () => {
     await expect(canvas).toHaveAttribute('data-running', 'false');
   });
 });
+
+test.describe('celular', () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+  test('o céu WebGL só entra no primeiro gesto; antes, o sol em CSS', async ({ page }) => {
+    await page.goto('/');
+    await page.waitForTimeout(2500);
+    await expect(page.locator('canvas#sky')).toHaveCount(0);
+    await expect(page.locator('.sky-fallback')).toBeVisible();
+    await page.mouse.wheel(0, 300);
+    await expect(page.locator('canvas#sky')).toHaveCount(1, { timeout: 8000 });
+    await expect(page.locator('canvas#sky')).toHaveAttribute('data-tier', 'low');
+  });
+});

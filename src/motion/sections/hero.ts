@@ -1,6 +1,6 @@
 import { gsap } from 'gsap';
 import { SplitText } from 'gsap/SplitText';
-import { ANY_MOTION } from '../setup';
+import { ANY_MOTION, DESKTOP_MOTION } from '../setup';
 
 const fmt = new Intl.NumberFormat('pt-BR');
 
@@ -11,7 +11,8 @@ export function initHero(mm: gsap.MatchMedia): void {
   mm.add(ANY_MOTION, () => {
     const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
     let split: SplitText | undefined;
-    if (title) {
+    // no celular o título aparece de imediato: é o LCP, e dividir o texto custa tempo de CPU
+    if (title && matchMedia(DESKTOP_MOTION).matches) {
       split = SplitText.create(title, { type: 'lines', mask: 'lines', linesClass: 'line' });
       tl.from(split.lines, { yPercent: 105, duration: 1.1, stagger: 0.08 }, 0.1);
     }

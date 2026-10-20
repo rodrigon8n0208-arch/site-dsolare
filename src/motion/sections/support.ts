@@ -5,13 +5,24 @@ import { ANY_MOTION, DESKTOP_MOTION } from '../setup';
 
 const once = (trigger: Element, start = 'top 82%') => ({ trigger, start, once: true });
 
-/** Títulos de seção: linhas sobem por máscara. Hero e #energia têm coreografia própria. */
+/**
+ * Títulos de seção: linhas sobem por máscara. Hero e #energia têm coreografia própria.
+ * O texto só é dividido quando o título chega perto da tela: dividir tudo no load custava ~230ms no celular.
+ */
 function titles() {
   const els = gsap.utils.toArray<HTMLElement>('[data-anim="lines"]').filter((el) => !el.closest('#topo, #energia'));
-  const splits = els.map((el) => {
-    const split = SplitText.create(el, { type: 'lines', mask: 'lines', linesClass: 'line' });
-    gsap.from(split.lines, { yPercent: 105, duration: 1, stagger: 0.08, ease: 'expo.out', scrollTrigger: once(el) });
-    return split;
+  const splits: SplitText[] = [];
+  els.forEach((el) => {
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top bottom+=320',
+      once: true,
+      onEnter: () => {
+        const split = SplitText.create(el, { type: 'lines', mask: 'lines', linesClass: 'line' });
+        splits.push(split);
+        gsap.from(split.lines, { yPercent: 105, duration: 1, stagger: 0.08, ease: 'expo.out', scrollTrigger: once(el) });
+      },
+    });
   });
   return () => splits.forEach((s) => s.revert());
 }
@@ -49,13 +60,14 @@ function manifesto() {
   gsap.set('[data-anim="strike"]', { '--strike': 0 });
 }
 
-/** Citação: as palavras acendem com o scroll, como o dia clareando. */
+/** Citação: as palavras acendem com o scroll, como o fim de tarde. */
 function citacao() {
   const quote = document.querySelector<HTMLElement>('#citacao [data-anim="words"]');
   if (!quote) return () => {};
   const split = SplitText.create(quote, { type: 'words', wordsClass: 'word' });
-  gsap.fromTo(split.words, { opacity: 0.15 }, {
-    opacity: 1,
+  // cor (não opacidade): o tom inicial já tem contraste 3:1 sobre a noite, como pede texto grande
+  gsap.fromTo(split.words, { color: '#5b6f8c' }, {
+    color: '#ffffff',
     stagger: 0.1,
     ease: 'none',
     scrollTrigger: { trigger: quote, start: 'top 80%', end: 'bottom 45%', scrub: true },
@@ -77,7 +89,6 @@ export function initSupport(mm: gsap.MatchMedia): void {
     fotos(!!ctx.conditions.desktop);
     manifesto();
     contato();
-    ScrollTrigger.refresh();
     return () => undo.forEach((fn) => fn());
   });
 }

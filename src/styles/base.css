@@ -398,6 +398,9 @@ html.has-sky .sky-fallback { opacity: 0; transition: opacity 600ms ease; }
 .ruler__item dt { color: var(--text-night-soft); font-size: 0.875rem; }
 .ruler__item dd {
   margin: 0;
+  /* caixa fixa: o count-up troca o texto a cada quadro sem recalcular o layout da página */
+  height: 1em;
+  contain: strict;
   font-family: var(--font-display);
   font-size: clamp(1.9rem, 3.6vw, 3rem);
   font-weight: 800;

@@ -19,6 +19,8 @@ export type Motion = {
 export function initMotion(): Motion {
   document.documentElement.classList.add('has-motion');
   gsap.defaults({ ease: 'power3.out', duration: 0.8 });
+  // a barra de endereço do celular aparecendo/sumindo não deve recalcular todos os gatilhos
+  ScrollTrigger.config({ ignoreMobileResize: true });
 
   const mm = gsap.matchMedia();
   let lenis: Lenis | null = null;
@@ -46,8 +48,6 @@ export function initMotion(): Motion {
   });
 
   addEventListener('orientationchange', () => ScrollTrigger.refresh());
-  // fontes mudam as alturas: recalcula os gatilhos quando carregam
-  document.fonts?.ready.then(() => ScrollTrigger.refresh());
 
   return {
     mm,

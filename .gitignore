@@ -7,3 +7,5 @@ playwright-report/
 .lighthouseci/
 .impeccable/config.local.json
 *.local
+.lighthouseci/
+dist-profile/

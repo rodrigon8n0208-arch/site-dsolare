@@ -131,14 +131,18 @@ test.describe('movimentos de apoio', () => {
     await page.waitForTimeout(600);
     const words = page.locator('#citacao [data-anim="words"] .word');
     await expect.poll(() => words.count()).toBeGreaterThan(5);
-    expect(parseFloat(await words.first().evaluate((el) => getComputedStyle(el).opacity))).toBeLessThan(0.5);
+    expect(await words.first().evaluate((el) => getComputedStyle(el).color)).not.toBe('rgb(255, 255, 255)');
     await scrollThrough(page);
     expect(await hiddenAnimated(page)).toEqual([]);
+    expect(await words.last().evaluate((el) => getComputedStyle(el).color)).toBe('rgb(255, 255, 255)');
   });
 
   test('títulos de seção revelam por linha', async ({ page }) => {
     await page.goto('/');
     await page.waitForTimeout(600);
+    // divididos só perto da tela (economia de CPU no load)
+    expect(await page.locator('#projetos .section-title .line').count()).toBe(0);
+    await page.locator('#servicos').scrollIntoViewIfNeeded();
     await expect.poll(() => page.locator('#servicos .section-title .line').count()).toBeGreaterThan(0);
   });
 
