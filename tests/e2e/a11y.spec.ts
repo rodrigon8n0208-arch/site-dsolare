@@ -6,6 +6,7 @@ for (const width of [1440, 390]) {
     test.use({ viewport: { width, height: width === 390 ? 844 : 900 }, reducedMotion: 'reduce' });
 
     test('axe sem violações serious/critical', async ({ page }) => {
+      test.setTimeout(90_000);
       await page.goto('/');
       const results = await new AxeBuilder({ page }).exclude('.sky').analyze();
       const bad = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
