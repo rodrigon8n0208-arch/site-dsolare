@@ -5,6 +5,7 @@ import './styles/base.css';
 import { buildPanelGrid } from './ui/panel-grid';
 import { initNav } from './ui/nav';
 import { initMotion } from './motion/setup';
+import { startSky } from './sky/mount';
 import { createConsent } from './lead/consent';
 import { fbqProxy } from './lead/pixel';
 import { initConsentBanner, initLeadForm, initQuickForm, prefillFromQuery } from './lead/form';
@@ -31,3 +32,9 @@ if (form) {
 
 const ano = document.getElementById('ano');
 if (ano) ano.textContent = String(new Date().getFullYear());
+
+// O céu WebGL entra depois do primeiro paint: o LCP é o texto do hero, nunca o canvas.
+const idle = (fn: () => void) => ('requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 200));
+const bootSky = () => idle(() => void startSky(motion.onProgress));
+if (document.readyState === 'complete') bootSky();
+else addEventListener('load', bootSky, { once: true });
