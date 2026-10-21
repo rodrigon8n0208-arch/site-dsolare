@@ -658,3 +658,5 @@ h1 em, h2 em {
   .hero__inner { padding-bottom: 2rem; }
   .energia { padding-top: 1.5rem; padding-bottom: 4rem; }
 }
+/* celular: afasta o nome da empresa do header */
+@media (max-width: 700px) { .hero__word { top: calc(var(--header-h) + 2.75rem); } }
