@@ -588,7 +588,7 @@ h1 em, h2 em {
 .site-footer li a:hover { color: #fff; text-decoration: underline; }
 .site-footer__base { display: grid; gap: 0.5rem; padding-block: 1.5rem 2rem; border-top: 1px solid rgb(169 187 211 / 0.18); font-size: 0.8125rem; }
 .site-footer__base p { margin: 0; }
-@media (min-width: 900px) { .site-footer__grid { grid-template-columns: 2fr 1fr 1.4fr; } .site-footer__base { grid-template-columns: 1fr auto; } }
+@media (min-width: 900px) { .site-footer__grid { grid-template-columns: 1fr 1fr; } .site-footer__base { grid-template-columns: 1fr auto; } }
 
 /* ───────── Flutuantes ───────── */
 .wa-float {
@@ -660,3 +660,18 @@ h1 em, h2 em {
 }
 /* celular: afasta o nome da empresa do header */
 @media (max-width: 700px) { .hero__word { top: calc(var(--header-h) + 2.75rem); } }
+/* rodapé: contatos com ícones + mapa */
+.ft-contacts li { display: flex; gap: 0.75rem; align-items: flex-start; }
+.ft-contacts svg { flex: none; width: 20px; height: 20px; margin-top: 0.7rem; fill: none; stroke: var(--color-sun-soft); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ft-contacts li > span { padding-block: 0.6rem; line-height: 1.5; }
+.map { position: relative; overflow: hidden; border-radius: 18px; aspect-ratio: 16 / 10; background: #0b2a55; border: 1px solid rgb(169 187 211 / 0.18); }
+.map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.map__open {
+  position: absolute; top: 12px; left: 12px; z-index: 1;
+  display: inline-flex; align-items: center; gap: 0.4rem; min-height: 40px; padding: 0 0.9rem;
+  border-radius: 10px; background: #fff; color: var(--color-navy); font-size: 0.875rem; font-weight: 600; text-decoration: none;
+  box-shadow: 0 6px 16px -6px rgb(0 0 0 / 0.4);
+}
+.map__open svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.map__open:hover { background: #eef3fa; }
+@media (min-width: 1100px) { .site-footer__grid { grid-template-columns: 1.3fr 0.7fr 1.2fr 1.5fr; gap: 3rem; } }
