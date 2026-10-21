@@ -9,9 +9,7 @@ import { startScenes } from './sky/mount';
 import { initHero } from './motion/sections/hero';
 import { initMetodo } from './motion/sections/metodo';
 import { initSupport } from './motion/sections/support';
-import { createConsent } from './lead/consent';
-import { fbqProxy } from './lead/pixel';
-import { initConsentBanner, initLeadForm, initQuickForm, prefillFromQuery } from './lead/form';
+import { initLeadForm, initQuickForm, prefillFromQuery } from './lead/form';
 
 const motion = initMotion();
 initNav();
@@ -29,16 +27,9 @@ void (async () => {
   if (document.readyState === 'complete') ScrollTrigger.refresh();
 })();
 
-let storage: Storage | null = null;
-try { storage = window.localStorage; } catch { /* bloqueado */ }
-const consent = createConsent(storage, fbqProxy);
-
-const banner = document.getElementById('cookie-consent');
-if (banner) initConsentBanner(banner, consent);
-
 const form = document.getElementById('lead-form') as HTMLFormElement | null;
 if (form) {
-  initLeadForm(form, consent, import.meta.env.VITE_LEAD_ENDPOINT ?? '');
+  initLeadForm(form, import.meta.env.VITE_LEAD_ENDPOINT ?? '');
   prefillFromQuery(form);
   const quick = document.querySelector<HTMLFormElement>('[data-quick]');
   if (quick) initQuickForm(quick, form);

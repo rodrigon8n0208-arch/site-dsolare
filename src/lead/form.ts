@@ -1,4 +1,3 @@
-import type { Consent } from './consent';
 import { buildWhatsAppUrl, type LeadData } from './whatsapp';
 
 function saveLead(endpoint: string, data: LeadData & { origem: string; pagina: string }) {
@@ -16,7 +15,7 @@ function saveLead(endpoint: string, data: LeadData & { origem: string; pagina: s
   }
 }
 
-export function initLeadForm(form: HTMLFormElement, consent: Consent, endpoint: string): void {
+export function initLeadForm(form: HTMLFormElement, endpoint: string): void {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const honeypot = form.querySelector<HTMLInputElement>('[name="empresa_site"]');
@@ -26,15 +25,10 @@ export function initLeadForm(form: HTMLFormElement, consent: Consent, endpoint: 
     const data: LeadData = { nome: field('nome').trim(), whatsapp: field('whatsapp').trim(), cidade: field('cidade').trim(), conta: field('conta') };
 
     saveLead(endpoint, { ...data, origem: 'site', pagina: location.href });
-    consent.track('Lead', { content_name: 'analise-conta-luz', cidade: data.cidade, faixa_conta: data.conta });
 
     const url = buildWhatsAppUrl(data);
     const win = window.open(url, '_blank', 'noopener');
     if (!win) location.href = url;
-  });
-
-  document.querySelectorAll<HTMLAnchorElement>('a[href*="wa.me/"]').forEach((a) => {
-    a.addEventListener('click', () => consent.track('Contact'));
   });
 }
 
@@ -57,13 +51,3 @@ export function prefillFromQuery(form: HTMLFormElement): void {
   if (conta && Array.from(select.options).some((o) => o.value === conta)) select.value = conta;
 }
 
-export function initConsentBanner(banner: HTMLElement, consent: Consent): void {
-  if (consent.state() === 'granted') {
-    consent.grant();
-    return;
-  }
-  if (consent.state() === 'denied') return;
-  banner.hidden = false;
-  banner.querySelector('#cc-accept')?.addEventListener('click', () => { consent.grant(); banner.hidden = true; });
-  banner.querySelector('#cc-decline')?.addEventListener('click', () => { consent.deny(); banner.hidden = true; });
-}

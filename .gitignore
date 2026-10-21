@@ -9,3 +9,4 @@ playwright-report/
 *.local
 .lighthouseci/
 dist-profile/
+.env

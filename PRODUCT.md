@@ -24,7 +24,7 @@ D'Solare Energia e Inovação: consultoria, projeto, instalação com equipe pr�
 ## Capabilities and Constraints
 - Formulário: nome, WhatsApp, cidade, faixa de conta (até R$ 300 / R$ 300–600 / R$ 600–1.500 / R$ 1.500–5.000 / acima de R$ 5.000), aceite LGPD e honeypot `empresa_site`.
 - Captura opcional de lead via Google Apps Script (`VITE_LEAD_ENDPOINT`; vazio = desligado).
-- Meta Pixel `407551268600245` só com consentimento (`localStorage['dsolare_consent']`); eventos PageView, Contact e Lead.
+- Sem Meta Pixel nem qualquer rastreador de terceiros (decisão do usuário, 2026-10-21).
 - Política de privacidade em `/privacidade.html`, vigente desde 21/07/2026.
 
 ## Brand Commitments
