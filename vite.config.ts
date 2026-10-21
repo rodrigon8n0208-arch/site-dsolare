@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 /**
  * No build: embute o CSS no HTML (some um round trip que bloqueava a renderização)
- * e faz preload da Archivo do título — sem isso o h1 troca de fonte depois de pintado e quebra as linhas (CLS).
+ * e faz preload da Inter do título — sem isso o h1 troca de fonte depois de pintado e quebra as linhas (CLS).
  */
 function criticalAssets(): Plugin {
   return {
@@ -19,7 +19,7 @@ function criticalAssets(): Plugin {
           const tag = new RegExp(`<link rel="stylesheet"[^>]*href="/${file.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*>`);
           if (tag.test(out)) out = out.replace(tag, () => `<style>${String(chunk.source)}</style>`);
         }
-        const font = Object.keys(bundle).find((f) => /archivo-latin-wdth-normal-.*\.woff2$/.test(f));
+        const font = Object.keys(bundle).find((f) => /inter-latin-wght-normal-.*\.woff2$/.test(f));
         if (font) out = out.replace('</title>', `</title>\n    <link rel="preload" href="/${font}" as="font" type="font/woff2" crossorigin />`);
         return out;
       },

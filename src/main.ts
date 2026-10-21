@@ -1,31 +1,27 @@
-import '@fontsource-variable/archivo/wdth.css';
-import '@fontsource-variable/figtree';
+import '@fontsource-variable/inter';
+import '@fontsource/instrument-serif/latin-400-italic.css';
 import './styles/tokens.css';
 import './styles/base.css';
-import { buildPanelGrid } from './ui/panel-grid';
 import { initNav } from './ui/nav';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { initMotion } from './motion/setup';
-import { startSky } from './sky/mount';
+import { startScenes } from './sky/mount';
 import { initHero } from './motion/sections/hero';
-import { initEnergia } from './motion/sections/energia';
 import { initMetodo } from './motion/sections/metodo';
 import { initSupport } from './motion/sections/support';
 import { createConsent } from './lead/consent';
 import { fbqProxy } from './lead/pixel';
 import { initConsentBanner, initLeadForm, initQuickForm, prefillFromQuery } from './lead/form';
 
-buildPanelGrid();
-
 const motion = initMotion();
-initNav(motion.onProgress);
+initNav();
 initHero(motion.mm);
 
 // O resto da coreografia é montado em tarefas separadas, devolvendo a thread entre elas:
 // no celular, montar tudo de uma vez travava a página por ~1s (TBT).
 const yieldToMain = () => new Promise<void>((r) => setTimeout(r, 0));
 void (async () => {
-  for (const init of [() => initEnergia(motion.mm), () => initMetodo(motion.mm, () => motion.lenis), () => initSupport(motion.mm)]) {
+  for (const init of [() => initMetodo(motion.mm, () => motion.lenis), () => initSupport(motion.mm)]) {
     await yieldToMain();
     init();
   }
@@ -57,10 +53,10 @@ let skyStarted = false;
 const bootSky = () => {
   if (skyStarted) return;
   skyStarted = true;
-  idle(() => void startSky(motion.onProgress));
+  idle(() => void startScenes());
 };
-// no desktop o céu entra quando a página assenta; no celular, no primeiro gesto —
-// até lá o sol em CSS ocupa o lugar e o Three.js não disputa CPU com o carregamento
+// no desktop a luz entra quando a página assenta; no celular, no primeiro gesto —
+// até lá a foto basta e o Three.js não disputa CPU com o carregamento
 if (matchMedia('(min-width: 1024px)').matches) {
   if (document.readyState === 'complete') bootSky();
   else addEventListener('load', bootSky, { once: true });

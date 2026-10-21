@@ -7,6 +7,7 @@ uniform float uPointerOn;
 uniform vec2 uSun;
 uniform float uCapture;
 uniform vec4 uTarget;   // x, y (canto inferior esquerdo), largura, altura no espaço da câmera
+uniform float uCalm;    // 1: acalma a coluna de texto à esquerda (céu); 0: luz livre (hero)
 varying float vAlpha;
 varying float vNearSun;
 
@@ -31,7 +32,7 @@ void main() {
   vNearSun = smoothstep(1.1, 0.0, distance(p.xy, sunClip));
   float twinkle = 0.35 + 0.65 * (sin(uTime * (1.0 + aSeed * 2.0) + aSeed * 40.0) * 0.5 + 0.5);
   // coluna do texto (esquerda) fica calma; a luz se adensa perto do sol
-  float calm = mix(0.18, 1.0, smoothstep(-0.55 * uAspect, 0.25 * uAspect, p.x));
+  float calm = mix(mix(1.0, 0.18, uCalm), 1.0, smoothstep(-0.55 * uAspect, 0.25 * uAspect, p.x));
   vAlpha = twinkle * (0.3 + 0.7 * vNearSun) * mix(calm, 1.0, k);
   vAlpha *= 1.0 - k * 0.4;
 

@@ -25,5 +25,5 @@ test('página de privacidade carrega estilizada', async ({ page }) => {
   await expect(page.locator('h1')).toHaveText('Política de Privacidade');
   await expect(page.locator('.doc h2')).toHaveCount(10);
   const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-  expect(bg).toBe('rgb(245, 248, 252)');
+  expect(bg).toBe('rgb(255, 255, 255)');
 });

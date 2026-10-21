@@ -61,22 +61,11 @@
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-    <div class="sky" aria-hidden="true">
-      <div class="sky-fallback"></div>
-    </div>
-
     <header id="header" class="site-header">
       <div class="site-header__bar">
         <a class="site-header__logo" href="#topo" aria-label="D'Solare — página inicial">
           <img src="/img/logo-dsolare-branco.png" alt="D'Solare Energia e Inovação" width="974" height="220" />
         </a>
-        <div class="sun-clock" aria-hidden="true">
-          <svg class="sun-clock__arc" viewBox="0 0 64 24">
-            <path class="sun-clock__track" d="M2 22 A30 20 0 0 1 62 22" />
-            <circle class="sun-clock__sun" cx="2" cy="22" r="3" />
-          </svg>
-          <span class="sun-clock__time">06:00</span>
-        </div>
         <nav class="site-nav" aria-label="Navegação principal">
           <a href="#servicos">Serviços</a>
           <a href="#metodo">Método</a>
@@ -102,109 +91,131 @@
     </header>
 
     <main id="conteudo">
-      <!-- 06h · amanhecer -->
-      <section id="topo" class="hero" data-sky-zone>
-        <div class="hero__inner wrap">
-          <p class="hero__coords" aria-hidden="true">Maceió · 9°39′S 35°44′W</p>
-          <h1 class="hero__title" data-anim="lines">
-            A sua conta de luz pode ser <em>muito menor.</em> A gente mostra o cálculo.
-          </h1>
-          <p class="hero__lead">Mais de 5.000 projetos realizados em Alagoas — residencial, corporativo e pós-venda.</p>
-          <form class="quick" action="#contato" data-quick>
-            <label class="quick__label" for="q-conta">Conta de luz (R$/mês)</label>
-            <div class="quick__row">
-              <div class="select">
-                <select id="q-conta" name="conta">
-                  <option>Até R$ 300</option>
-                  <option>R$ 300 a R$ 600</option>
-                  <option>R$ 600 a R$ 1.500</option>
-                  <option>R$ 1.500 a R$ 5.000</option>
-                  <option>Acima de R$ 5.000</option>
-                </select>
-              </div>
-              <button class="btn btn--sun" type="submit">
-                Solicitar análise gratuita
-                <svg class="btn__arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" /></svg>
-              </button>
-            </div>
-          </form>
-          <div class="hero__after">
-            <p class="hero__note">Análise gratuita e sem compromisso · resposta pelo WhatsApp</p>
-            <a class="link-arrow hero__more" href="#projetos">Ver projetos realizados</a>
-          </div>
+      <!-- HERO · foto + luz -->
+      <section id="topo" class="hero">
+        <div class="hero__media" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 700px)" srcset="/img/hero-telhado-m.jpg" />
+            <img class="hero__photo" src="/img/hero-telhado.jpg" alt="" width="2400" height="1624" fetchpriority="high" decoding="async" />
+          </picture>
+          <div class="hero__light" data-light></div>
+          <p class="hero__word">D'SOLARE</p>
         </div>
 
-        <div id="numeros" class="ruler wrap">
-          <dl class="ruler__list">
-            <div class="ruler__item">
-              <dt>Projetos realizados</dt>
-              <dd data-anim="count" data-count-to="5000" data-prefix="+">+5.000</dd>
-            </div>
-            <div class="ruler__item">
-              <dt>Anos em Maceió</dt>
-              <dd data-anim="count" data-count-to="10">10</dd>
-            </div>
-            <div class="ruler__item">
-              <dt>Profissionais</dt>
-              <dd data-anim="count" data-count-to="120" data-prefix="+">+120</dd>
-            </div>
-            <div class="ruler__item">
-              <dt>Ano de fundação</dt>
-              <dd>2016</dd>
-            </div>
-          </dl>
+        <div class="hero__inner wrap">
+          <div class="hero__copy">
+            <p class="pill"><span class="pill__dot"></span>10 anos em Alagoas · +5.000 projetos entregues</p>
+            <h1 class="hero__title">A sua conta de luz pode ser <em>muito menor.</em> A gente mostra o cálculo.</h1>
+            <p class="hero__lead">Mais de 5.000 projetos realizados em Alagoas — residencial, corporativo e pós-venda.</p>
+            <form class="quick" action="#contato" data-quick>
+              <label class="quick__label" for="q-conta">Conta de luz (R$/mês)</label>
+              <div class="quick__row">
+                <div class="select">
+                  <select id="q-conta" name="conta">
+                    <option>Até R$ 300</option>
+                    <option>R$ 300 a R$ 600</option>
+                    <option>R$ 600 a R$ 1.500</option>
+                    <option>R$ 1.500 a R$ 5.000</option>
+                    <option>Acima de R$ 5.000</option>
+                  </select>
+                </div>
+                <button class="btn btn--sun btn--lg" type="submit">
+                  Solicitar análise gratuita
+                  <svg class="btn__arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" /></svg>
+                </button>
+              </div>
+            </form>
+            <p class="hero__note">Análise gratuita e sem compromisso · resposta pelo WhatsApp</p>
+          </div>
+
+          <aside id="numeros" class="hero__stats" aria-label="D'Solare em números">
+            <dl class="glass-stats">
+              <div class="glass-stat">
+                <dd class="stat__value stat__value--sun" data-anim="count" data-count-to="5000" data-prefix="+">+5.000</dd>
+                <dt>Projetos realizados</dt>
+              </div>
+              <div class="glass-stat">
+                <dd class="stat__value" data-anim="count" data-count-to="10">10</dd>
+                <dt>Anos em Maceió</dt>
+              </div>
+            </dl>
+            <dl class="mini-stats">
+              <div class="mini-stat">
+                <dd class="stat__value" data-anim="count" data-count-to="120" data-prefix="+">+120</dd>
+                <dt>Profissionais</dt>
+              </div>
+              <div class="mini-stat">
+                <dd class="stat__value">2016</dd>
+                <dt>Ano de fundação</dt>
+              </div>
+            </dl>
+          </aside>
         </div>
+        <a class="hero__scroll" href="#energia" aria-label="Rolar para a próxima seção"><span></span></a>
       </section>
 
-      <!-- 08h · luz vira energia -->
-      <section id="energia" class="energia" data-sky-zone aria-labelledby="energia-title">
+      <!-- LUZ VIRA ENERGIA -->
+      <section id="energia" class="energia" aria-labelledby="energia-title">
         <div class="energia__inner wrap">
           <h2 id="energia-title" class="energia__title" data-anim="lines">
             Cada sistema dimensionado com os dados reais do seu <em>telhado</em>, do seu <em>consumo</em> e da sua <em>tarifa</em>.
           </h2>
-          <div class="panel-grid" aria-hidden="true"></div>
         </div>
       </section>
 
-      <!-- 10h · serviços -->
-      <section id="servicos" class="section section--day">
+      <!-- SERVIÇOS -->
+      <section id="servicos" class="section">
         <div class="wrap">
           <header class="section-head">
-            <h2 class="section-title" data-anim="lines">Não é só instalar painel. É cuidar do projeto inteiro.</h2>
+            <p class="kicker">O que a D'Solare faz</p>
+            <h2 class="section-title" data-anim="lines">Não é só instalar painel. É cuidar do <em>projeto inteiro.</em></h2>
             <p class="section-lead">Residencial, corporativo ou acompanhamento de sistema já instalado — o ponto de partida é sempre o mesmo: entender a sua situação real antes de propor qualquer coisa.</p>
           </header>
           <div class="services">
-            <article class="service" data-anim="sweep">
+            <article class="service card" data-anim="sweep">
+              <span class="icon-chip" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 10.5 12 3.5l8.5 7V20.5h-17zM9.5 20.5v-6h5v6" /></svg></span>
               <h3 class="service__name">Residencial</h3>
               <p class="service__text">Projeto calculado com o seu consumo, o seu telhado e a sua tarifa. Não trabalhamos com média de mercado. Cada casa tem uma conta diferente — e merece um sistema diferente.</p>
-              <p class="service__claim">O painel certo para o seu telhado real.</p>
+              <p class="service__claim"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>O painel certo para o seu telhado real.</p>
             </article>
-            <article class="service" data-anim="sweep">
+            <article class="service card" data-anim="sweep">
+              <span class="icon-chip" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.5 20.5V4.5h10v16M14.5 9h5v11.5M3 20.5h18M8 8h3M8 12h3M8 16h3" /></svg></span>
               <h3 class="service__name">Corporativo</h3>
               <p class="service__text">Sistemas de maior porte com retorno financeiro calculado a partir dos seus dados. Relatório de viabilidade, cronograma realista e acompanhamento de geração depois da entrega.</p>
-              <p class="service__claim">Redução de custo fixo com número na ponta do lápis.</p>
+              <p class="service__claim"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>Redução de custo fixo com número na ponta do lápis.</p>
             </article>
-            <article class="service" data-anim="sweep">
+            <article class="service card" data-anim="sweep">
+              <span class="icon-chip" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 13v-1a8 8 0 0 1 16 0v1M4 13.5a2 2 0 0 1 2-2h1.5v6H6a2 2 0 0 1-2-2zM20 13.5a2 2 0 0 0-2-2h-1.5v6H18a2 2 0 0 0 2-2zM16.5 17.5v.5a3 3 0 0 1-3 3H12" /></svg></span>
               <h3 class="service__name">Pós-venda</h3>
               <p class="service__text">Monitoramento ativo da geração, atendimento técnico com nome e voz. Quando o sistema precisa de ajuste, a gente está aqui — não um número de SAC que ninguém atende.</p>
-              <p class="service__claim">Suporte que tem rosto e responde.</p>
+              <p class="service__claim"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>Suporte que tem rosto e responde.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- 12h · memorial de cálculo -->
-      <section id="metodo" class="section section--sheet metodo">
+      <!-- MÉTODO · trilho horizontal -->
+      <section id="metodo" class="section section--off metodo">
         <div class="wrap">
           <header class="section-head">
-            <h2 class="section-title" data-anim="lines">Antes de qualquer proposta, a gente olha os seus dados.</h2>
+            <p class="kicker">Como a gente trabalha</p>
+            <h2 class="section-title" data-anim="lines">Antes de qualquer proposta, a gente <em>olha os seus dados.</em></h2>
             <p class="section-lead">A maioria das empresas manda orçamento antes de entender o que você consome, como é o seu telhado e qual é a sua tarifa real. A D'Solare faz o contrário.</p>
           </header>
         </div>
         <div class="metodo__viewport">
-          <div class="wrap"><p class="sheet-stamp"><span>Memorial de cálculo</span><span>Exemplo ilustrativo</span></p></div>
+          <div class="wrap metodo__bar">
+            <ol class="metodo__progress" aria-hidden="true">
+              <li data-dot="1"><span>1</span>Diagnóstico</li>
+              <li data-dot="2"><span>2</span>Projeto</li>
+              <li data-dot="3"><span>3</span>Instalação</li>
+              <li data-dot="4"><span>4</span>Acompanhamento</li>
+              <i class="metodo__line"><i class="metodo__fill"></i></i>
+            </ol>
+            <p class="chip">Exemplo ilustrativo</p>
+          </div>
           <ol class="metodo__track">
-            <li class="step" data-step="1">
+            <li class="step card" data-step="1">
               <div class="step__copy">
                 <span class="step__num">01</span>
                 <h3 class="step__title">Diagnóstico</h3>
@@ -230,7 +241,7 @@
                 </svg>
               </figure>
             </li>
-            <li class="step" data-step="2">
+            <li class="step card" data-step="2">
               <div class="step__copy">
                 <span class="step__num">02</span>
                 <h3 class="step__title">Projeto</h3>
@@ -257,7 +268,7 @@
                 </svg>
               </figure>
             </li>
-            <li class="step" data-step="3">
+            <li class="step card" data-step="3">
               <div class="step__copy">
                 <span class="step__num">03</span>
                 <h3 class="step__title">Instalação</h3>
@@ -275,7 +286,7 @@
                 </svg>
               </figure>
             </li>
-            <li class="step" data-step="4">
+            <li class="step card" data-step="4">
               <div class="step__copy">
                 <span class="step__num">04</span>
                 <h3 class="step__title">Acompanhamento</h3>
@@ -299,69 +310,82 @@
         </div>
       </section>
 
-      <!-- 14h · projetos -->
-      <section id="projetos" class="section section--day">
+      <!-- PROJETOS -->
+      <section id="projetos" class="section">
         <div class="wrap">
-          <header class="section-head">
-            <h2 class="section-title" data-anim="lines">Mais de 5.000 projetos. Cada um com uma conta diferente na história.</h2>
+          <header class="section-head section-head--split">
+            <div>
+              <p class="kicker">Projetos realizados</p>
+              <h2 class="section-title" data-anim="lines">Mais de 5.000 projetos. Cada um com uma <em>conta diferente</em> na história.</h2>
+            </div>
             <p class="section-lead">Cada projeto começa com dados reais e termina com acompanhamento real. Abaixo, exemplos reais de instalações da D'Solare — independente do tamanho da conta ou do telhado.</p>
           </header>
           <div class="cases">
-            <article class="case case--lead">
+            <article class="case card">
               <div class="case__media" data-anim="mask">
                 <img src="/img/case-residencial.jpg" alt="Instalação residencial de painéis solares vista de drone, em Maceió/AL" width="800" height="600" loading="lazy" decoding="async" />
+                <p class="case__tag">Residencial · Maceió/AL</p>
               </div>
-              <p class="case__tag">Residencial · Maceió/AL</p>
-              <h3 class="case__title">Sistema residencial sob medida</h3>
-              <p class="case__text">Dimensionado com o consumo real da casa e a orientação do telhado. Instalação por equipe própria, com acompanhamento de geração no pós-venda.</p>
+              <div class="case__body">
+                <h3 class="case__title">Sistema residencial sob medida</h3>
+                <p class="case__text">Dimensionado com o consumo real da casa e a orientação do telhado. Instalação por equipe própria, com acompanhamento de geração no pós-venda.</p>
+              </div>
             </article>
-            <article class="case">
+            <article class="case card">
               <div class="case__media" data-anim="mask">
                 <img src="/img/case-corporativo.jpg" alt="Instalação solar corporativa vista de drone, próxima ao litoral em Alagoas" width="800" height="600" loading="lazy" decoding="async" />
+                <p class="case__tag">Corporativo · Hospitalidade</p>
               </div>
-              <p class="case__tag">Corporativo · Hospitalidade</p>
-              <h3 class="case__title">Geração para operação comercial</h3>
-              <p class="case__text">Sistema de maior porte com relatório de viabilidade e cronograma realista. Redução de custo fixo calculada a partir dos dados do cliente.</p>
+              <div class="case__body">
+                <h3 class="case__title">Geração para operação comercial</h3>
+                <p class="case__text">Sistema de maior porte com relatório de viabilidade e cronograma realista. Redução de custo fixo calculada a partir dos dados do cliente.</p>
+              </div>
             </article>
-            <article class="case">
+            <article class="case card">
               <div class="case__media" data-anim="mask">
                 <img src="/img/case-industrial.jpg" alt="Usina solar sobre galpão industrial vista de drone, em Alagoas" width="800" height="600" loading="lazy" decoding="async" />
+                <p class="case__tag">Corporativo · B2B</p>
               </div>
-              <p class="case__tag">Corporativo · B2B</p>
-              <h3 class="case__title">Usina sobre galpão industrial</h3>
-              <p class="case__text">Auditoria de consumo, dimensionamento técnico e retorno projetado com os números reais da operação. Acompanhamento de geração após a entrega.</p>
+              <div class="case__body">
+                <h3 class="case__title">Usina sobre galpão industrial</h3>
+                <p class="case__text">Auditoria de consumo, dimensionamento técnico e retorno projetado com os números reais da operação. Acompanhamento de geração após a entrega.</p>
+              </div>
             </article>
           </div>
           <p class="cases__more">
-            <a class="link-arrow" href="https://www.instagram.com/dsolareenergia/" target="_blank" rel="noopener">Ver mais projetos no Instagram</a>
+            <a class="btn btn--ghost-dark" href="https://www.instagram.com/dsolareenergia/" target="_blank" rel="noopener">Ver mais projetos no Instagram
+              <svg class="btn__arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5l5 5-5 5" /></svg></a>
           </p>
         </div>
       </section>
 
-      <!-- 15h · quem somos -->
-      <section id="sobre" class="section section--afternoon sobre">
-        <div class="wrap">
+      <!-- QUEM SOMOS -->
+      <section id="sobre" class="section section--off sobre">
+        <div class="wrap sobre__grid">
           <header class="section-head">
-            <h2 class="section-title section-title--xl" data-anim="lines">Dois engenheiros. Mais de 120 pessoas. Dez anos construindo junto.</h2>
+            <p class="kicker">Quem está por trás</p>
+            <h2 class="section-title" data-anim="lines">Dois engenheiros. Mais de 120 pessoas. <em>Dez anos construindo junto.</em></h2>
             <p class="section-lead">Diego Uchoa e Diego Braga se conheceram em Maceió e fundaram a D'Solare em 2016. Dez anos depois, a empresa tem mais de 120 profissionais e continua sendo dirigida pelos mesmos dois sócios — que ainda aparecem nos projetos, ainda respondem mensagens e ainda acreditam que o dono deve conhecer o cliente.</p>
           </header>
+          <figure class="team">
+            <div class="team__media" data-anim="mask">
+              <img src="/img/usina-aerea.jpg" alt="Vista aérea de uma grande usina solar instalada pela D'Solare em Alagoas" width="1600" height="900" loading="lazy" decoding="async" />
+            </div>
+            <figcaption class="team__caption">
+              <span class="kicker kicker--light">O time</span>
+              <strong class="team__title">Equipe própria, do projeto ao telhado.</strong>
+              <span class="team__text">Instaladores, engenheiros, consultores, atendimento e operações. A D'Solare não terceiriza a entrega — a equipe é própria porque é a única forma de garantir que o padrão chega ao telhado.</span>
+            </figcaption>
+          </figure>
         </div>
-        <figure class="team">
-          <div class="team__media" data-anim="mask">
-            <img src="/img/usina-aerea.jpg" alt="Vista aérea de uma grande usina solar instalada pela D'Solare em Alagoas" width="1600" height="900" loading="lazy" decoding="async" />
-          </div>
-          <figcaption class="team__caption wrap">
-            <strong class="team__title">Equipe própria, do projeto ao telhado.</strong>
-            <span class="team__text">Instaladores, engenheiros, consultores, atendimento e operações. A D'Solare não terceiriza a entrega — a equipe é própria porque é a única forma de garantir que o padrão chega ao telhado.</span>
-          </figcaption>
-        </figure>
       </section>
 
-      <!-- 17h · manifesto -->
-      <section id="manifesto" class="section section--dusk manifesto">
+      <!-- MANIFESTO -->
+      <section id="manifesto" class="section section--navy manifesto">
         <div class="wrap">
           <header class="section-head">
-            <h2 class="section-title" data-anim="lines">Tem muita coisa errada no mercado solar. A gente escolheu o lado oposto.</h2>
+            <p class="kicker kicker--light">Por que a D'Solare existe</p>
+            <h2 class="section-title" data-anim="lines">Tem muita coisa errada no mercado solar. A gente escolheu <em>o lado oposto.</em></h2>
             <p class="section-lead">O setor solar cresceu rápido — e junto vieram práticas que prejudicam quem investe. A D'Solare se posiciona contra três delas. Não como declaração de marketing. Como filtro de decisão: quando há tensão entre fechar mais rápido e fechar do jeito certo, a gente escolhe o jeito certo.</p>
           </header>
           <ol class="practices">
@@ -383,10 +407,11 @@
       </section>
 
       <!-- FAQ -->
-      <section id="faq" class="section section--day faq">
-        <div class="wrap faq__grid">
-          <header class="section-head">
-            <h2 class="section-title" data-anim="lines">A gente explica antes de você perguntar.</h2>
+      <section id="faq" class="section section--off faq">
+        <div class="wrap">
+          <header class="section-head section-head--center">
+            <p class="kicker">Dúvidas frequentes</p>
+            <h2 class="section-title" data-anim="lines">A gente explica <em>antes de você perguntar.</em></h2>
           </header>
           <div class="faq__list">
             <details class="qa">
@@ -409,86 +434,88 @@
         </div>
       </section>
 
-      <!-- 18h · citação -->
-      <section id="citacao" class="section section--dusk citacao">
+      <!-- CITAÇÃO -->
+      <section id="citacao" class="section citacao">
         <figure class="wrap">
-          <blockquote class="citacao__quote" data-anim="words">“A gente não vende preço. A gente vende valor.”</blockquote>
-          <figcaption class="citacao__author">— Diego Uchoa, sócio fundador</figcaption>
+          <blockquote class="citacao__quote" data-anim="words">“A gente não vende preço. A gente vende <em>valor.</em>”</blockquote>
+          <figcaption class="citacao__author"><span class="citacao__avatar" aria-hidden="true">DU</span>Diego Uchoa, sócio fundador</figcaption>
         </figure>
       </section>
 
-      <!-- 18h30 · pôr do sol -->
-      <section id="contato" class="contato" data-sky-zone>
-        <div class="wrap contato__grid">
-          <div class="contato__copy">
-            <h2 class="contato__title" data-anim="lines">Manda a conta de luz.<br /> A gente cuida do resto.</h2>
-            <p class="contato__lead">A análise é gratuita e sem compromisso. Você envia a sua conta de luz e a foto do telhado, a gente projeta o cálculo real do seu caso e apresenta a proposta com os seus dados — não uma média de mercado.</p>
-            <dl class="contacts">
-              <div>
-                <dt>Onde estamos</dt>
-                <dd>Av. Dr. Júlio Marques Luz, 978 · Jatiúca, Maceió/AL</dd>
-              </div>
-              <div>
-                <dt>Fale direto</dt>
-                <dd><a href="tel:+558299980160">(82) 9998-0160</a></dd>
-              </div>
-              <div>
-                <dt>No Instagram</dt>
-                <dd><a href="https://www.instagram.com/dsolareenergia/" target="_blank" rel="noopener">@dsolareenergia</a></dd>
-              </div>
-            </dl>
-          </div>
+      <!-- CONTATO -->
+      <section id="contato" class="contato">
+        <div class="wrap">
+          <div class="contato__box">
+            <div class="contato__copy">
+              <p class="kicker kicker--light">Pronto para começar</p>
+              <h2 class="contato__title" data-anim="lines">Manda a conta de luz. <em>A gente cuida do resto.</em></h2>
+              <p class="contato__lead">A análise é gratuita e sem compromisso. Você envia a sua conta de luz e a foto do telhado, a gente projeta o cálculo real do seu caso e apresenta a proposta com os seus dados — não uma média de mercado.</p>
+              <dl class="contacts">
+                <div>
+                  <dt>Onde estamos</dt>
+                  <dd>Av. Dr. Júlio Marques Luz, 978 · Jatiúca, Maceió/AL</dd>
+                </div>
+                <div>
+                  <dt>Fale direto</dt>
+                  <dd><a href="tel:+558299980160">(82) 9998-0160</a></dd>
+                </div>
+                <div>
+                  <dt>No Instagram</dt>
+                  <dd><a href="https://www.instagram.com/dsolareenergia/" target="_blank" rel="noopener">@dsolareenergia</a></dd>
+                </div>
+              </dl>
+            </div>
 
-          <form id="lead-form" class="lead-form">
-            <div class="lead-form__head">
-              <p class="lead-form__title">Solicite sua análise gratuita</p>
-              <p class="lead-form__sub">Preenche e a gente continua no WhatsApp.</p>
-            </div>
-            <div class="field">
-              <label for="f-nome">Nome completo</label>
-              <input id="f-nome" name="nome" type="text" required autocomplete="name" placeholder="Como podemos te chamar?" />
-            </div>
-            <div class="field-row">
-              <div class="field">
-                <label for="f-whats">WhatsApp</label>
-                <input id="f-whats" name="whatsapp" type="tel" required autocomplete="tel" inputmode="tel" placeholder="(82) 9 8765-4321" />
+            <form id="lead-form" class="lead-form">
+              <div class="lead-form__head">
+                <p class="lead-form__title">Solicite sua análise gratuita</p>
+                <p class="lead-form__sub">Preenche e a gente continua no WhatsApp.</p>
               </div>
               <div class="field">
-                <label for="f-cidade">Cidade</label>
-                <input id="f-cidade" name="cidade" type="text" required autocomplete="address-level2" placeholder="Maceió" />
+                <label for="f-nome">Nome completo</label>
+                <input id="f-nome" name="nome" type="text" required autocomplete="name" placeholder="Como podemos te chamar?" />
               </div>
-            </div>
-            <div class="field">
-              <label for="f-conta">Conta de luz (R$/mês)</label>
-              <div class="select">
-                <select id="f-conta" name="conta">
-                  <option>Até R$ 300</option>
-                  <option>R$ 300 a R$ 600</option>
-                  <option>R$ 600 a R$ 1.500</option>
-                  <option>R$ 1.500 a R$ 5.000</option>
-                  <option>Acima de R$ 5.000</option>
-                </select>
+              <div class="field-row">
+                <div class="field">
+                  <label for="f-whats">WhatsApp</label>
+                  <input id="f-whats" name="whatsapp" type="tel" required autocomplete="tel" inputmode="tel" placeholder="(82) 9 8765-4321" />
+                </div>
+                <div class="field">
+                  <label for="f-cidade">Cidade</label>
+                  <input id="f-cidade" name="cidade" type="text" required autocomplete="address-level2" placeholder="Maceió" />
+                </div>
               </div>
-            </div>
-            <div class="hp" aria-hidden="true">
-              <label for="f-empresa">Não preencher</label>
-              <input id="f-empresa" type="text" name="empresa_site" tabindex="-1" autocomplete="off" />
-            </div>
-            <label class="consent-check">
-              <input type="checkbox" name="aceite" required />
-              <span>Autorizo a D'Solare a usar meus dados para entrar em contato sobre a minha análise, conforme a <a href="/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
-            </label>
-            <button class="btn btn--sun btn--block" type="submit">
-              <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" /></svg>
-              Continuar no WhatsApp
-            </button>
-            <p class="lead-form__foot">Resposta em até 24h úteis. Atendimento direto, sem robô.</p>
-          </form>
+              <div class="field">
+                <label for="f-conta">Conta de luz (R$/mês)</label>
+                <div class="select">
+                  <select id="f-conta" name="conta">
+                    <option>Até R$ 300</option>
+                    <option>R$ 300 a R$ 600</option>
+                    <option>R$ 600 a R$ 1.500</option>
+                    <option>R$ 1.500 a R$ 5.000</option>
+                    <option>Acima de R$ 5.000</option>
+                  </select>
+                </div>
+              </div>
+              <div class="hp" aria-hidden="true">
+                <label for="f-empresa">Não preencher</label>
+                <input id="f-empresa" type="text" name="empresa_site" tabindex="-1" autocomplete="off" />
+              </div>
+              <label class="consent-check">
+                <input type="checkbox" name="aceite" required />
+                <span>Autorizo a D'Solare a usar meus dados para entrar em contato sobre a minha análise, conforme a <a href="/privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
+              </label>
+              <button class="btn btn--sun btn--block btn--lg" type="submit">
+                <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" /></svg>
+                Continuar no WhatsApp
+              </button>
+              <p class="lead-form__foot">Resposta em até 24h úteis. Atendimento direto, sem robô.</p>
+            </form>
+          </div>
         </div>
       </section>
     </main>
 
-    <!-- 19h · noite -->
     <footer class="site-footer">
       <div class="wrap site-footer__grid">
         <div class="site-footer__brand">

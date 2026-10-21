@@ -16,17 +16,14 @@ test('desktop: depois de rolar até o fim, nada fica preso escondido', async ({ 
   await page.goto('/');
   await scrollThrough(page);
   expect(await hiddenAnimated(page)).toEqual([]);
-  await expect(page.locator('.ruler__item dd')).toHaveText(['+5.000', '10', '+120', '2016']);
+  await expect(page.locator('.hero .stat__value')).toHaveText(['+5.000', '10', '+120', '2016']);
 });
 
-test('header fica sólido ao rolar e o relógio solar acompanha o dia', async ({ page }) => {
+test('header fica sólido ao rolar', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#header')).not.toHaveClass(/is-solid/);
-  await expect(page.locator('.sun-clock__time')).toHaveText('06:00');
   await page.evaluate(() => scrollTo(0, 120));
   await expect(page.locator('#header')).toHaveClass(/is-solid/);
-  await scrollThrough(page);
-  await expect(page.locator('.sun-clock__time')).toHaveText('19:00');
 });
 
 test('menu mobile abre e fecha com aria-expanded', async ({ page }) => {
@@ -80,7 +77,7 @@ test.describe('assinatura 1 · luz vira energia', () => {
   test('hero: count-up termina nos números reais', async ({ page }) => {
     await page.goto('/');
     await page.waitForTimeout(2500);
-    await expect(page.locator('.ruler__item dd')).toHaveText(['+5.000', '10', '+120', '2016']);
+    await expect(page.locator('.hero .stat__value')).toHaveText(['+5.000', '10', '+120', '2016']);
   });
 });
 
@@ -131,10 +128,10 @@ test.describe('movimentos de apoio', () => {
     await page.waitForTimeout(600);
     const words = page.locator('#citacao [data-anim="words"] .word');
     await expect.poll(() => words.count()).toBeGreaterThan(5);
-    expect(await words.first().evaluate((el) => getComputedStyle(el).color)).not.toBe('rgb(255, 255, 255)');
+    expect(await words.first().evaluate((el) => getComputedStyle(el).color)).not.toBe('rgb(11, 26, 46)');
     await scrollThrough(page);
     expect(await hiddenAnimated(page)).toEqual([]);
-    expect(await words.last().evaluate((el) => getComputedStyle(el).color)).toBe('rgb(255, 255, 255)');
+    expect(await words.last().evaluate((el) => getComputedStyle(el).color)).toBe('rgb(11, 26, 46)');
   });
 
   test('títulos de seção revelam por linha', async ({ page }) => {

@@ -7,6 +7,10 @@ function setCurrent(steps: HTMLElement[], index: number) {
     if (i === index) s.setAttribute('aria-current', 'step');
     else s.removeAttribute('aria-current');
   });
+  // barra de progresso: etapas já vistas ficam marcadas
+  document.querySelectorAll<HTMLElement>('.metodo__progress [data-dot]').forEach((dot) => {
+    dot.toggleAttribute('data-on', Number(dot.dataset.dot) <= index + 1);
+  });
 }
 
 /** Desenha as cotas e acende os campos de uma etapa. */
@@ -23,6 +27,7 @@ export function initMetodo(mm: gsap.MatchMedia, getLenis: () => Lenis | null): v
   const track = section?.querySelector<HTMLElement>('.metodo__track');
   if (!section || !viewport || !track) return;
   const steps = Array.from(track.querySelectorAll<HTMLElement>('.step'));
+  const fill = section.querySelector<HTMLElement>('.metodo__fill');
   setCurrent(steps, 0);
 
   mm.add(DESKTOP_MOTION, () => {
@@ -38,7 +43,10 @@ export function initMetodo(mm: gsap.MatchMedia, getLenis: () => Lenis | null): v
         pin: true,
         scrub: 0.5,
         invalidateOnRefresh: true,
-        onUpdate: (self) => setCurrent(steps, Math.min(steps.length - 1, Math.floor(self.progress * steps.length * 0.999))),
+        onUpdate: (self) => {
+          setCurrent(steps, Math.min(steps.length - 1, Math.floor(self.progress * steps.length * 0.999)));
+          fill?.style.setProperty('--progress', self.progress.toFixed(3));
+        },
       },
     });
     // pausa curta na etapa 01 antes de o trilho andar

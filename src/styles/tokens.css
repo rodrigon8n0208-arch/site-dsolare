@@ -1,20 +1,16 @@
 @import "tailwindcss";
 
 /*
- * Fallbacks com a largura da Archivo expandida do título (medida: Arial Bold ×1.082, Roboto Bold ×1.333).
- * Enquanto a fonte real carrega, as linhas do h1 quebram nos mesmos lugares: sem salto de layout.
+ * Fallback com as métricas da Inter (Arial ajustada): enquanto a fonte real carrega,
+ * as linhas quebram nos mesmos lugares e nada salta (CLS).
  */
 @font-face {
-  font-family: "Archivo Fallback";
-  src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"), local("Helvetica-Bold");
-  font-weight: 700 900;
-  size-adjust: 108.2%;
-}
-@font-face {
-  font-family: "Archivo Fallback Roboto";
-  src: local("Roboto Bold"), local("Roboto-Bold");
-  font-weight: 700 900;
-  size-adjust: 133.3%;
+  font-family: "Inter Fallback";
+  src: local("Arial"), local("ArialMT"), local("Helvetica");
+  size-adjust: 107.1%;
+  ascent-override: 90.5%;
+  descent-override: 22.5%;
+  line-gap-override: 0%;
 }
 
 @theme {
@@ -23,12 +19,16 @@
   --color-night: #061529;
   --color-midnight: #040d1a;
   --color-sun: #f4901e;
+  --color-sun-soft: #ffb24d;
   --color-sun-deep: #d9480f;
-  --color-day: #f5f8fc;
+  --color-off: #f4f6f9;
   --color-ink: #0b1a2e;
+  --color-ink-soft: #4a5b72;
+  --color-line: #e3e8ef;
 
-  --font-display: "Archivo Variable", "Archivo Fallback", "Archivo Fallback Roboto", system-ui, sans-serif;
-  --font-sans: "Figtree Variable", "Figtree", system-ui, sans-serif;
+  --font-sans: "Inter Variable", "Inter Fallback", system-ui, sans-serif;
+  --font-display: "Inter Variable", "Inter Fallback", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }

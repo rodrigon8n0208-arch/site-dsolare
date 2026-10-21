@@ -21,9 +21,14 @@ import skyFrag from './shaders/sky.frag?raw';
 import photonsVert from './shaders/photons.vert?raw';
 import photonsFrag from './shaders/photons.frag?raw';
 
+/** 'light': só partículas, fundo transparente (sobre a foto do hero). 'sky': céu de amanhecer + partículas. */
+export type SceneMode = 'light' | 'sky';
+
 export type SkyController = {
   setPhase(p: DayPhase, progress: number): void;
-  setPointer(x: number, y: number): void;
+  /** Posição do sol em fração do canvas (0–1, origem no canto superior esquerdo). */
+  setSun(x: number, y: number): void;
+  setPointer(clientX: number, clientY: number): void;
   setActive(on: boolean): void;
   /** 0–1: os fótons convergem para o retângulo (coordenadas de viewport, px). */
   setCapture(t: number, rect?: DOMRect): void;
@@ -35,9 +40,11 @@ const hexToVec3 = (hex: string) => {
   return new Vector3(((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255);
 };
 
-export function mountSky(canvas: HTMLCanvasElement, tier: Exclude<Tier, 'none'>): SkyController {
-  const renderer = new WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
+export function mountSky(canvas: HTMLCanvasElement, tier: Exclude<Tier, 'none'>, mode: SceneMode = 'sky'): SkyController {
+  const transparent = mode === 'light';
+  const renderer = new WebGLRenderer({ canvas, antialias: false, alpha: transparent, premultipliedAlpha: true, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(devicePixelRatio, tier === 'high' ? 1.5 : 1));
+  if (transparent) renderer.setClearColor(0x000000, 0);
 
   const scene = new Scene();
   const camera = new OrthographicCamera(-1, 1, 1, -1, -10, 10);
@@ -45,22 +52,25 @@ export function mountSky(canvas: HTMLCanvasElement, tier: Exclude<Tier, 'none'>)
   const skyUniforms = {
     uTop: { value: hexToVec3('#061529') },
     uHorizon: { value: hexToVec3('#f4901e') },
-    uSun: { value: new Vector2(0.78, 0.2) },
+    uSun: { value: new Vector2(0.85, 0.2) },
     uAspect: { value: 1 },
     uWarmth: { value: 1 },
     uTime: { value: 0 },
     uRays: { value: tier === 'high' ? 1 : 0 },
   };
-  const skyMesh = new Mesh(
-    new PlaneGeometry(2, 2),
-    new ShaderMaterial({ vertexShader: skyVert, fragmentShader: skyFrag, uniforms: skyUniforms, depthTest: false, depthWrite: false }),
-  );
-  skyMesh.frustumCulled = false;
-  skyMesh.renderOrder = -1;
-  scene.add(skyMesh);
+  if (!transparent) {
+    const skyMesh = new Mesh(
+      new PlaneGeometry(2, 2),
+      new ShaderMaterial({ vertexShader: skyVert, fragmentShader: skyFrag, uniforms: skyUniforms, depthTest: false, depthWrite: false }),
+    );
+    skyMesh.frustumCulled = false;
+    skyMesh.renderOrder = -1;
+    scene.add(skyMesh);
+  }
 
-  const count = tier === 'high' ? PARTICLES.high : tier === 'low' ? PARTICLES.low : Math.round(PARTICLES.low * 0.6);
-  const field = createPhotonField(count, 2016);
+  const base = tier === 'high' ? PARTICLES.high : tier === 'low' ? PARTICLES.low : Math.round(PARTICLES.low * 0.6);
+  const count = transparent ? Math.round(base * 0.36) : base;
+  const field = createPhotonField(count, transparent ? 7 : 2016);
   const geo = new BufferGeometry();
   geo.setAttribute('position', new BufferAttribute(field.positions, 3));
   geo.setAttribute('aSeed', new BufferAttribute(field.seeds, 1));
@@ -74,6 +84,7 @@ export function mountSky(canvas: HTMLCanvasElement, tier: Exclude<Tier, 'none'>)
     uWarmth: skyUniforms.uWarmth,
     uCapture: { value: 0 },
     uTarget: { value: new Vector4(0, 0, 0, 0) },
+    uCalm: { value: transparent ? 0 : 1 },
   };
   const photons = new Points(
     geo,
@@ -84,6 +95,7 @@ export function mountSky(canvas: HTMLCanvasElement, tier: Exclude<Tier, 'none'>)
       transparent: true,
       depthWrite: false,
       blending: AdditiveBlending,
+      premultipliedAlpha: true,
     }),
   );
   photons.frustumCulled = false;
@@ -98,9 +110,10 @@ export function mountSky(canvas: HTMLCanvasElement, tier: Exclude<Tier, 'none'>)
 
   let aspect = 1;
   let running = false;
+  const host = canvas.parentElement ?? canvas;
   const resize = () => {
-    const w = innerWidth;
-    const h = innerHeight;
+    const w = host.clientWidth || innerWidth;
+    const h = host.clientHeight || innerHeight;
     aspect = w / h;
     renderer.setSize(w, h, false);
     camera.left = -aspect;
@@ -108,7 +121,7 @@ export function mountSky(canvas: HTMLCanvasElement, tier: Exclude<Tier, 'none'>)
     camera.updateProjectionMatrix();
     skyUniforms.uAspect.value = aspect;
     photonUniforms.uAspect.value = aspect;
-    photonUniforms.uSize.value = (tier === 'high' ? 7 : 6) * renderer.getPixelRatio() * Math.min(1.4, Math.max(0.8, h / 900));
+    photonUniforms.uSize.value = (tier === 'high' ? 7 : 6) * (transparent ? 1.05 : 1) * renderer.getPixelRatio() * Math.min(1.4, Math.max(0.8, h / 900));
     if (!running) render();
   };
 
@@ -129,7 +142,8 @@ export function mountSky(canvas: HTMLCanvasElement, tier: Exclude<Tier, 'none'>)
     );
   };
 
-  addEventListener('resize', resize);
+  const ro = new ResizeObserver(resize);
+  ro.observe(host);
   document.addEventListener('visibilitychange', update);
   canvas.dataset.tier = tier;
   canvas.dataset.running = 'false';
@@ -141,15 +155,19 @@ export function mountSky(canvas: HTMLCanvasElement, tier: Exclude<Tier, 'none'>)
       skyUniforms.uTop.value.copy(hexToVec3(p.skyTop));
       skyUniforms.uHorizon.value.copy(hexToVec3(p.skyHorizon));
       skyUniforms.uWarmth.value = p.warmth;
-      // o sol fica à direita na manhã (hero e #energia) e só depois atravessa o céu
       const x0 = aspect < 1 ? 0.9 : 0.85;
-      const travel = Math.min(1, Math.max(0, (progress - 0.15) / 0.8));
-      const eased = travel * travel * (3 - 2 * travel);
-      skyUniforms.uSun.value.set(x0 - (x0 - 0.2) * eased, 0.2 + Math.max(-0.05, p.sunElevation) * 0.0095);
+      skyUniforms.uSun.value.set(x0 - 0.1 * progress, 0.2 + Math.max(-0.05, p.sunElevation) * 0.0095);
       if (!running) render();
     },
-    setPointer(x, y) {
-      photonUniforms.uPointer.value.set(((x / innerWidth) * 2 - 1) * aspect, -((y / innerHeight) * 2 - 1));
+    setSun(x, y) {
+      skyUniforms.uSun.value.set(x, 1 - y);
+      if (!running) render();
+    },
+    setPointer(clientX, clientY) {
+      const box = canvas.getBoundingClientRect();
+      const x = (clientX - box.left) / box.width;
+      const y = (clientY - box.top) / box.height;
+      photonUniforms.uPointer.value.set((x * 2 - 1) * aspect, -(y * 2 - 1));
     },
     setActive(on) {
       active = on;
@@ -158,15 +176,16 @@ export function mountSky(canvas: HTMLCanvasElement, tier: Exclude<Tier, 'none'>)
     setCapture(t, rect) {
       photonUniforms.uCapture.value = t;
       if (rect) {
-        const x = ((rect.left / innerWidth) * 2 - 1) * aspect;
-        const y = -((rect.bottom / innerHeight) * 2 - 1);
-        photonUniforms.uTarget.value.set(x, y, (rect.width / innerWidth) * 2 * aspect, (rect.height / innerHeight) * 2);
+        const box = canvas.getBoundingClientRect();
+        const x = (((rect.left - box.left) / box.width) * 2 - 1) * aspect;
+        const y = -(((rect.bottom - box.top) / box.height) * 2 - 1);
+        photonUniforms.uTarget.value.set(x, y, (rect.width / box.width) * 2 * aspect, (rect.height / box.height) * 2);
       }
       if (!running) render();
     },
     dispose() {
       renderer.setAnimationLoop(null);
-      removeEventListener('resize', resize);
+      ro.disconnect();
       document.removeEventListener('visibilitychange', update);
       geo.dispose();
       renderer.dispose();
