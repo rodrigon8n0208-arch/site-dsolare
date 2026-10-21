@@ -435,7 +435,8 @@ h1 em, h2 em {
 .case:hover { scale: 1.03; box-shadow: var(--shadow-lift); }
 .case__media { position: relative; overflow: hidden; background: #dbe4ef; }
 .case__media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; scale: 1.12; transition: scale 700ms var(--ease-out-expo); }
-.case:hover .case__media img { scale: 1.24; }
+/* a foto tem parallax do GSAP (que fixa scale inline): o zoom do hover soma por cima, com prioridade */
+.case:hover .case__media img { scale: 1.1 !important; }
 .case__tag {
   position: absolute; left: 14px; bottom: 14px; margin: 0;
   padding: 0.35rem 0.75rem; border-radius: 999px;

@@ -33,7 +33,8 @@ function cards() {
   groups.forEach(([wrap, item]) => {
     const group = document.querySelector(wrap);
     if (!group) return;
-    gsap.from(group.querySelectorAll(item), { y: 48, opacity: 0, duration: 1.1, stagger: 0.1, ease: 'expo.out', scrollTrigger: once(group, 'top 85%') });
+    // ao terminar, limpa o que o GSAP escreveu inline (ele trava 'scale: none' e anularia o hover do CSS)
+    gsap.from(group.querySelectorAll(item), { y: 48, opacity: 0, duration: 1.1, stagger: 0.1, ease: 'expo.out', clearProps: 'transform,translate,rotate,scale,opacity', scrollTrigger: once(group, 'top 85%') });
   });
   gsap.utils.toArray<HTMLElement>('.service').forEach((card, i) => {
     gsap.fromTo(card, { '--sweep': '-110%' }, { '--sweep': '110%', duration: 1.6, delay: 0.35 + i * 0.12, ease: 'power2.inOut', scrollTrigger: once(card, 'top 85%') });
