@@ -644,3 +644,12 @@ h1 em, h2 em {
   background: linear-gradient(180deg, rgb(6 21 41 / 0), var(--color-night));
 }
 @media (min-width: 701px) { .hero__word { font-size: clamp(4.5rem, 15.5vw, 17rem); top: calc(var(--header-h) + 1vh); } }
+/* celular: o texto do hero cai sobre o sol e o céu claro — escurece a partir de onde o texto começa */
+@media (max-width: 700px) {
+  .hero__media::after {
+    background:
+      linear-gradient(180deg, rgb(6 21 41 / 0.45) 0%, rgb(6 21 41 / 0.05) 14%, rgb(6 21 41 / 0.35) 26%, rgb(6 21 41 / 0.78) 40%, rgb(6 21 41 / 0.88) 60%, rgb(6 21 41 / 0.94) 85%, var(--color-night) 100%);
+  }
+  .hero__title { text-shadow: 0 2px 18px rgb(6 21 41 / 0.7); }
+  .hero__lead, .hero__note, .quick__label { text-shadow: 0 1px 12px rgb(6 21 41 / 0.8); }
+}
