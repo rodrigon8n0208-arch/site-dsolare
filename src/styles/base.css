@@ -653,3 +653,8 @@ h1 em, h2 em {
   .hero__title { text-shadow: 0 2px 18px rgb(6 21 41 / 0.7); }
   .hero__lead, .hero__note, .quick__label { text-shadow: 0 1px 12px rgb(6 21 41 / 0.8); }
 }
+/* celular: aproxima a seção 2 do fim do hero (sem o vão vazio entre os números e o título) */
+@media (max-width: 700px) {
+  .hero__inner { padding-bottom: 2rem; }
+  .energia { padding-top: 1.5rem; padding-bottom: 4rem; }
+}
